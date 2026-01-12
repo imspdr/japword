@@ -1,10 +1,16 @@
-import { FC } from 'react';
-import { Typography } from '@imspdr/ui';
-import { useDeviceType } from '@imspdr/ui';
-import { LoadingContainer, PageContainer } from './styled';
+import { FC } from "react";
+import { Typography } from "@imspdr/ui";
+import { useWords } from "../../hooks/useWords";
+import {
+  GridList,
+  LoadingContainer,
+  PageContainer,
+} from "./styled";
+import WordItem from "../../components/WordItem";
+import ListActions from "../../components/ListActions";
 
 const ListPage: FC = () => {
-  const { isLoading, isError } = { isLoading: false, isError: false };
+  const { data: words, isLoading, isError } = useWords();
 
   if (isLoading) {
     return (
@@ -19,7 +25,7 @@ const ListPage: FC = () => {
   if (isError) {
     return (
       <LoadingContainer>
-        <Typography variant="body" level={1} style={{ color: 'red' }}>
+        <Typography variant="body" level={1} style={{ color: "red" }}>
           데이터를 불러오는 중 오류가 발생했습니다.
         </Typography>
       </LoadingContainer>
@@ -28,8 +34,16 @@ const ListPage: FC = () => {
 
   return (
     <PageContainer>
+      <ListActions />
+
+      <GridList>
+        {words?.map((word) => (
+          <WordItem key={word.id} word={word} />
+        ))}
+      </GridList>
     </PageContainer>
   );
 };
+
 
 export default ListPage;

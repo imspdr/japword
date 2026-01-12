@@ -8,12 +8,18 @@ export const HeaderContainer = styled.header`
   height: 60px;
   background-color: var(--imspdr-background-bg1);
   border-bottom: 1px solid var(--imspdr-background-bg3);
+  z-index: 1000;
+  box-sizing: border-box;
+`;
+
+export const HeaderContent = styled.div`
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
-  z-index: 1000;
-  box-sizing: border-box;
+  padding: 0 20px;
 `;
 
 export const TitleSection = styled.div`
@@ -39,44 +45,11 @@ export const TitleButton = styled.button`
   }
 `;
 
-
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
   margin-left: 16px;
-`;
-
-export const LoginButton = styled.button`
-  background: var(--imspdr-primary-main);
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: opacity 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (hover: hover) {
-    &:hover {
-      opacity: 0.9;
-    }
-  }
-`;
-
-export const UserProfile = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-export const ProfileImage = styled.img`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--imspdr-border-border2);
 `;
 
 export const SignOutButton = styled.button`

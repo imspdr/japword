@@ -1,39 +1,32 @@
 import styled from '@emotion/styled';
 
 export const PageContainer = styled.div`
+  padding: 10px 20px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 24px;
-  height: 100%;
-  max-height: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  align-items: flex-start;
-  box-sizing: border-box;
-  overflow: hidden;
+`;
 
-  @media (max-width: 767px) {
-    flex-direction: column;
-    overflow-y: auto;
-    padding: 8px;
-    gap: 16px;
+export const GridList = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1440px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
 
 export const LoadingContainer = styled.div`
-  padding: 80px;
+  padding: 40px;
   text-align: center;
+  color: var(--imspdr-foreground-fg2);
 `;
 
-export const FlexColumn = styled.div`
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 
-  @media (max-width: 767px) {
-    height: auto;
-    width: 100%;
-  }
-`;
+
+
+
+

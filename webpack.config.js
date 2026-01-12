@@ -71,6 +71,8 @@ module.exports = (env, argv) => {
       },
       headers: {
         'Access-Control-Allow-Origin': '*',
+        'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+        'Cross-Origin-Embedder-Policy': 'unsafe-none'
       },
     },
   };
