@@ -39,28 +39,55 @@ export const TitleButton = styled.button`
   }
 `;
 
-export const SearchWrapper = styled.div`
-  flex: 1;
-  max-width: 400px;
-
-  /* Styling for the nested AutoComplete/SearchInput */
-  & > div {
-    background: var(--imspdr-background-bg2);
-    border: 1px solid var(--imspdr-background-bg3);
-    border-radius: 8px;
-
-    input {
-      background: transparent;
-      &::placeholder {
-        color: var(--imspdr-foreground-fg3);
-      }
-    }
-  }
-`;
 
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
   margin-left: 16px;
+`;
+
+export const LoginButton = styled.button`
+  background: var(--imspdr-primary-main);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+`;
+
+export const UserProfile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const ProfileImage = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--imspdr-border-border2);
+`;
+
+export const SignOutButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 `;

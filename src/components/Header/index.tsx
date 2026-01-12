@@ -1,14 +1,25 @@
-import { AutoComplete, ThemeToggleButton, Typography } from '@imspdr/ui';
-import { HeaderContainer, RightSection, SearchWrapper, TitleButton, TitleSection } from './styled';
-import { useDeviceType } from '@imspdr/ui';
+import { ThemeToggleButton, Typography } from '@imspdr/ui';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import {
+  HeaderContainer,
+  LoginButton,
+  ProfileImage,
+  RightSection,
+  SignOutButton,
+  TitleButton,
+  TitleSection,
+  UserProfile,
+} from './styled';
 
 interface HeaderProps {
   onHomeClick?: () => void;
-  searchOptions?: any[];
-  onSearchSelect?: (option: any) => void;
 }
 
-const Header = ({ onHomeClick, searchOptions = [], onSearchSelect }: HeaderProps) => {
+const Header = ({ onHomeClick }: HeaderProps) => {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
   const handleHomeClick = () => {
     if (onHomeClick) {
       onHomeClick();
@@ -16,17 +27,40 @@ const Header = ({ onHomeClick, searchOptions = [], onSearchSelect }: HeaderProps
       window.location.href = '/';
     }
   };
-  const { isPc } = useDeviceType();
+
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   return (
     <HeaderContainer>
       <TitleSection>
         <TitleButton onClick={handleHomeClick}>
           <Typography variant="title" level={2}>
-            JAPANESE PRACTICE
+            일본어 연습
           </Typography>
         </TitleButton>
       </TitleSection>
       <RightSection>
+        {user ? (
+          <UserProfile>
+            {user.photoURL && <ProfileImage src={user.photoURL} alt="Profile" />}
+            <Typography variant="body" level={2} style={{ color: 'var(--imspdr-foreground-fg1)' }}>
+              {user.displayName || user.email}
+            </Typography>
+            <SignOutButton onClick={logout}>
+              <Typography variant="caption" style={{ color: 'var(--imspdr-foreground-fg3)' }}>
+                로그아웃
+              </Typography>
+            </SignOutButton>
+          </UserProfile>
+        ) : (
+          <LoginButton onClick={handleLoginClick}>
+            <Typography variant="caption" level={2} style={{ color: 'white', fontWeight: 600 }}>
+              로그인
+            </Typography>
+          </LoginButton>
+        )}
         <ThemeToggleButton />
       </RightSection>
     </HeaderContainer>
