@@ -1,0 +1,28 @@
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { db } from "../firebase";
+
+import { Timestamp } from "firebase/firestore";
+
+export interface Word {
+  jp: string;
+  ko: string;
+  char: string;
+  description: string;
+  creator: string;
+  createdAt: string;
+}
+
+export interface WordWithId extends Word {
+  id: string;
+}
+
+export async function fetchWords(): Promise<WordWithId[]> {
+  const q = query(collection(db, "words"), orderBy("createdAt", "desc"));
+
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...(doc.data() as Word),
+  }));
+}
