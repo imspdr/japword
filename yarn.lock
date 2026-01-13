@@ -4479,6 +4479,11 @@ vary@~1.1.2:
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
+wanakana@^5.3.1:
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/wanakana/-/wanakana-5.3.1.tgz#e20798fb9687d926d4aad25874bc8e66096818ed"
+  integrity sha512-OSDqupzTlzl2LGyqTdhcXcl6ezMiFhcUwLBP8YKaBIbMYW1wAwDvupw2T9G9oVaKT9RmaSpyTXjxddFPUcFFIw==
+
 watchpack@^2.4.4:
   version "2.5.0"
   resolved "https://registry.npmjs.org/watchpack/-/watchpack-2.5.0.tgz"

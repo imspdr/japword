@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addWord } from "../../hooks/useWords";
 import { useToast } from "@imspdr/ui";
+import { bind, unbind } from 'wanakana';
 import {
   Container,
   Form,
@@ -18,6 +19,8 @@ const UploadLayout: FC = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const jpInputRef = useRef<HTMLInputElement>(null);
+  const charInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
     jp: "",
@@ -25,6 +28,19 @@ const UploadLayout: FC = () => {
     char: "",
     description: "",
   });
+
+  useEffect(() => {
+    if (jpInputRef.current) {
+      bind(jpInputRef.current);
+    }
+    if (charInputRef.current) {
+      bind(charInputRef.current);
+    }
+    return () => {
+      if (jpInputRef.current) unbind(jpInputRef.current);
+      if (charInputRef.current) unbind(charInputRef.current);
+    };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -67,6 +83,7 @@ const UploadLayout: FC = () => {
             일본어 단어 (필수)
           </Label>
           <Input
+            ref={jpInputRef}
             name="jp"
             value={formData.jp}
             onChange={handleChange}
@@ -80,6 +97,7 @@ const UploadLayout: FC = () => {
             읽는 법 (히라가나/가타카나)
           </Label>
           <Input
+            ref={charInputRef}
             name="char"
             value={formData.char}
             onChange={handleChange}

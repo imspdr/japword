@@ -1,12 +1,14 @@
 import { ThemeToggleButton, Typography } from '@imspdr/ui';
 import { useNavigate } from 'react-router-dom';
 
+import { useAuth, logout } from '../../hooks/useAuth';
 import {
   HeaderContainer,
   HeaderContent,
   RightSection,
   TitleButton,
   TitleSection,
+  SignOutButton
 } from './styled';
 
 interface HeaderProps {
@@ -15,6 +17,7 @@ interface HeaderProps {
 
 const Header = ({ onHomeClick }: HeaderProps) => {
   const navigate = useNavigate();
+  const user = useAuth();
 
   const handleHomeClick = () => {
     if (onHomeClick) {
@@ -22,6 +25,10 @@ const Header = ({ onHomeClick }: HeaderProps) => {
     } else {
       window.location.href = '/';
     }
+  };
+
+  const handleLogout = async () => {
+    await logout();
   };
 
   return (
@@ -35,6 +42,13 @@ const Header = ({ onHomeClick }: HeaderProps) => {
           </TitleButton>
         </TitleSection>
         <RightSection>
+          {user && (
+            <SignOutButton onClick={handleLogout}>
+              <Typography variant="body" size="medium" color="default">
+                로그아웃
+              </Typography>
+            </SignOutButton>
+          )}
           <ThemeToggleButton />
         </RightSection>
       </HeaderContent>
