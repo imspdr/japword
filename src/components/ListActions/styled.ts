@@ -19,12 +19,9 @@ export const ActionButton = styled.button`
   justify-content: center;
   font-weight: 600;
   color: var(--imspdr-foreground-fg1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-
   @media (hover: hover) {
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       border-color: var(--imspdr-primary-main);
       color: var(--imspdr-primary-main);
     }

@@ -1,11 +1,10 @@
 import { ThemeToggleButton, Typography } from '@imspdr/ui';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+
 import {
   HeaderContainer,
   HeaderContent,
   RightSection,
-  SignOutButton,
   TitleButton,
   TitleSection,
 } from './styled';
@@ -16,7 +15,6 @@ interface HeaderProps {
 
 const Header = ({ onHomeClick }: HeaderProps) => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
 
   const handleHomeClick = () => {
     if (onHomeClick) {
@@ -24,10 +22,6 @@ const Header = ({ onHomeClick }: HeaderProps) => {
     } else {
       window.location.href = '/';
     }
-  };
-
-  const handleLoginClick = () => {
-    navigate('/login');
   };
 
   return (
@@ -41,13 +35,6 @@ const Header = ({ onHomeClick }: HeaderProps) => {
           </TitleButton>
         </TitleSection>
         <RightSection>
-          {user && (
-            <SignOutButton onClick={logout}>
-              <Typography variant="caption" style={{ color: 'var(--imspdr-foreground-fg3)' }}>
-                로그아웃
-              </Typography>
-            </SignOutButton>
-          )}
           <ThemeToggleButton />
         </RightSection>
       </HeaderContent>

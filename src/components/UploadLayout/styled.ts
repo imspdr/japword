@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { Typography } from '@imspdr/ui';
+import styled from "@emotion/styled";
+import { Typography } from "@imspdr/ui";
 
 export const Container = styled.div`
   padding: 20px;
@@ -66,11 +66,11 @@ export const SubmitButton = styled.button`
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   transition: opacity 0.2s;
 
   @media (hover: hover) {

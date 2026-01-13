@@ -1,4 +1,4 @@
-import { useState, FC, useEffect } from "react";
+import { FC } from "react";
 
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ModalProvider, ThemeProvider, ToastProvider } from "@imspdr/ui";

@@ -1,12 +1,9 @@
 import { FC } from 'react';
-import { Stack } from '@imspdr/ui';
 import { WordWithId } from '../../hooks/useWords';
 import {
   CardContainer,
-  ContentContainer,
-  HeaderContainer,
+  InfoGroup,
   WordChar,
-  WordDesc,
   WordJP,
   WordKO
 } from './styled';
@@ -18,25 +15,17 @@ interface WordItemProps {
 const WordItem: FC<WordItemProps> = ({ word }) => {
   return (
     <CardContainer>
-      <HeaderContainer>
-        <Stack alignItems="baseline" gap="8px">
-          <WordJP variant="title" level={3}>
-            {word.jp}
-          </WordJP>
-          <WordChar variant="body" level={2}>
-            [{word.char}]
-          </WordChar>
-        </Stack>
-      </HeaderContainer>
-
-      <ContentContainer>
-        <WordKO variant="body" level={1}>
-          {word.ko}
-        </WordKO>
-        <WordDesc variant="body" level={2}>
-          {word.description}
-        </WordDesc>
-      </ContentContainer>
+      <InfoGroup>
+        <WordJP variant="title" level={3}>
+          {word.char}
+        </WordJP>
+        <WordChar variant="body" level={2}>
+          [{word.jp}]
+        </WordChar>
+      </InfoGroup>
+      <WordKO variant="body" level={1}>
+        {word.ko}
+      </WordKO>
     </CardContainer>
   );
 };

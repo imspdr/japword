@@ -20,6 +20,9 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
     },
     module: {
       rules: [
@@ -68,11 +71,6 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       static: {
         directory: path.join(__dirname, 'public'),
-      },
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
-        'Cross-Origin-Embedder-Policy': 'unsafe-none'
       },
     },
   };
