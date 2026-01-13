@@ -34,7 +34,13 @@ export const useWords = () => {
   });
 };
 
-export const addWord = async (word: Omit<Word, 'id'>) => {
-  const docRef = await addDoc(collection(db, "words"), word);
+export const addWord = async (word: Omit<Word, 'id' | 'createdAt'>) => {
+  const now = new Date();
+  const yyyymmdd = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+
+  const docRef = await addDoc(collection(db, "words"), {
+    ...word,
+    createdAt: yyyymmdd,
+  });
   return docRef.id;
 };

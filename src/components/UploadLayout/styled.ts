@@ -39,7 +39,7 @@ export const Input = styled.input`
   outline: none;
 
   &:focus {
-    border-color: var(--imspdr-primary-main);
+    border-color: var(--imspdr-mint-mint1);
   }
 `;
 
@@ -55,14 +55,14 @@ export const TextArea = styled.textarea`
   min-height: 100px;
 
   &:focus {
-    border-color: var(--imspdr-primary-main);
+    border-color: var(--imspdr-mint-mint1);
   }
 `;
 
 export const SubmitButton = styled.button`
   margin-top: 16px;
   padding: 12px;
-  background: var(--imspdr-primary-main);
+  background: var(--imspdr-mint-mint1);
   border: none;
   border-radius: 8px;
   cursor: pointer;

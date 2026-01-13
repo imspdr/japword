@@ -30,15 +30,13 @@ const UploadLayout: FC = () => {
   });
 
   useEffect(() => {
+    // jp is now for Reading (Kana), so we bind Wanakana to it
     if (jpInputRef.current) {
       bind(jpInputRef.current);
     }
-    if (charInputRef.current) {
-      bind(charInputRef.current);
-    }
+    // char is for Kanji, so NO binding
     return () => {
       if (jpInputRef.current) unbind(jpInputRef.current);
-      if (charInputRef.current) unbind(charInputRef.current);
     };
   }, []);
 
@@ -60,7 +58,6 @@ const UploadLayout: FC = () => {
       await addWord({
         ...formData,
         creator: "system",
-        createdAt: new Date().toISOString(),
       });
       showToast("단어가 성공적으로 등록되었습니다.");
       navigate("/list");
@@ -80,12 +77,12 @@ const UploadLayout: FC = () => {
       <Form onSubmit={handleSubmit}>
         <InputGroup>
           <Label variant="body" level={2}>
-            일본어 단어 (필수)
+            일본어 단어 (한자/표기)
           </Label>
           <Input
-            ref={jpInputRef}
-            name="jp"
-            value={formData.jp}
+            ref={charInputRef}
+            name="char"
+            value={formData.char}
             onChange={handleChange}
             placeholder="예: 猫"
             autoComplete="off"
@@ -94,12 +91,12 @@ const UploadLayout: FC = () => {
 
         <InputGroup>
           <Label variant="body" level={2}>
-            읽는 법 (히라가나/가타카나)
+            읽는 법 (히라가나/가타카나) - 필수
           </Label>
           <Input
-            ref={charInputRef}
-            name="char"
-            value={formData.char}
+            ref={jpInputRef}
+            name="jp"
+            value={formData.jp}
             onChange={handleChange}
             placeholder="예: ねこ"
             autoComplete="off"
