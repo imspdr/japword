@@ -4,6 +4,9 @@ export const PageContainer = styled.div`
   padding: 10px 20px;
   max-width: 1440px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export const GridList = styled.ul`
@@ -29,14 +32,9 @@ export const LoadingContainer = styled.div`
   color: var(--imspdr-foreground-fg2);
 `;
 
-export const SearchContainer = styled.div`
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto 24px;
-`;
-
 export const SearchInput = styled.input`
   width: 100%;
+  box-sizing: border-box;
   padding: 12px 16px;
   font-size: 16px;
   border: 1px solid var(--imspdr-border-border1);
