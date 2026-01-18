@@ -8,16 +8,8 @@ const ListActions: FC = () => {
 
   return (
     <ButtonGroup>
-      <Button onClick={() => navigate("/quiz")}>
-        <Typography variant="body" level={1}>
-          퀴즈 풀기
-        </Typography>
-      </Button>
-      <Button onClick={() => navigate("/upload")}>
-        <Typography variant="body" level={1}>
-          단어 등록
-        </Typography>
-      </Button>
+      <Button onClick={() => navigate("/quiz")}>퀴즈 풀기</Button>
+      <Button onClick={() => navigate("/upload")}>단어 등록</Button>
     </ButtonGroup>
   );
 };
