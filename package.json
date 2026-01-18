@@ -1,6 +1,6 @@
 {
   "name": "japword",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "imspdr.github.io/japword/",
   "engines": {
     "node": ">=20.0.0"
