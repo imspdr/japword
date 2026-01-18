@@ -1,8 +1,6 @@
-import { FC, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useAuth, checkIsAdmin } from '../../hooks/useAuth';
-import { useWords, WordWithId, deleteWord } from '../../hooks/useWords';
-import { Typography, useToast, useModal, Button, Stack } from '@imspdr/ui';
+import { FC } from 'react';
+import { useDetail } from '../../hooks/useDetail';
+import { Typography, useModal, Button, Stack } from '@imspdr/ui';
 import { FaVolumeUp } from 'react-icons/fa';
 import {
   Container,
@@ -14,51 +12,29 @@ import {
 } from './styled';
 
 const DetailPage: FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const user = useAuth();
-  const { showToast } = useToast();
+  const {
+    word,
+    isLoading,
+    isAdmin,
+    goBack,
+    deleteCurrentWord,
+    speakWord
+  } = useDetail();
   const { openModal, closeModal } = useModal();
-  const { data: words, isLoading, refetch } = useWords();
-  const [word, setWord] = useState<WordWithId | undefined>(undefined);
-  const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      checkIsAdmin(user.uid).then(setIsAdmin);
-    } else {
-      setIsAdmin(false);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (words && id) {
-      const found = words.find((w) => w.id === id);
-      setWord(found);
-    }
-  }, [words, id]);
-
-  const handleBack = () => {
-    navigate(-1);
-  };
-
-  const executeDelete = async () => {
-    if (!word) return;
-    try {
-      await deleteWord(word.id);
-      showToast('단어가 삭제되었습니다.');
-      await refetch();
-      closeModal();
-      navigate('/list');
-    } catch (error) {
-      console.error(error);
-      showToast('삭제 중 오류가 발생했습니다.');
-      closeModal();
-    }
-  };
-
-  const handleDelete = () => {
+  const initiateDelete = () => {
     if (!word || !isAdmin) return;
+
+    const handleConfirmDelete = async () => {
+      try {
+        await deleteCurrentWord();
+        closeModal();
+      } catch (error) {
+        // Error handling (toast) is done in hook, but we might want to keep modal open or close it?
+        // Original code closed it on error too.
+        closeModal();
+      }
+    };
 
     openModal(
       <Typography variant="body" level={1}>
@@ -70,21 +46,11 @@ const DetailPage: FC = () => {
         footer: (
           <Stack direction="row" gap="12px">
             <Button variant="outlined" onClick={() => closeModal()}>취소</Button>
-            <Button onClick={executeDelete} style={{ background: '#ff4d4f', borderColor: '#ff4d4f', color: 'white' }}>삭제</Button>
+            <Button onClick={handleConfirmDelete} style={{ background: '#ff4d4f', borderColor: '#ff4d4f', color: 'white' }}>삭제</Button>
           </Stack>
         )
       }
     );
-  };
-
-  const handleSpeak = () => {
-    if (!word) return;
-    const textToSpeak = word.jp || word.char;
-    if (!textToSpeak) return;
-
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.lang = 'ja-JP';
-    window.speechSynthesis.speak(utterance);
   };
 
   if (isLoading) {
@@ -98,7 +64,7 @@ const DetailPage: FC = () => {
   if (!word) {
     return (
       <Container>
-        <Button variant="outlined" onClick={handleBack}>← 돌아가기</Button>
+        <Button variant="outlined" onClick={goBack}>← 돌아가기</Button>
         <Typography variant="body" level={1}>단어를 찾을 수 없습니다.</Typography>
       </Container>
     );
@@ -114,7 +80,7 @@ const DetailPage: FC = () => {
           </KanjiDisplay>
           <Button
             variant="ghost"
-            onClick={handleSpeak}
+            onClick={speakWord}
             style={{ padding: '8px', borderRadius: '50%', minWidth: 'auto' }}
             aria-label="Listen"
           >
@@ -150,11 +116,11 @@ const DetailPage: FC = () => {
 
         {/* Action Row */}
         <Stack direction="row" gap="12px">
-          <Button variant="outlined" onClick={handleBack}>
+          <Button variant="outlined" onClick={goBack}>
             목록으로 돌아가기
           </Button>
           {isAdmin && (
-            <Button onClick={handleDelete} style={{ background: '#ff4d4f', borderColor: '#ff4d4f', color: 'white' }}>
+            <Button onClick={initiateDelete} style={{ background: '#ff4d4f', borderColor: '#ff4d4f', color: 'white' }}>
               삭제하기
             </Button>
           )}

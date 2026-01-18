@@ -1,31 +1,10 @@
-import { useEffect, useState } from "react";
-import { loginWithGoogle, useAuth, checkIsAdmin } from "@/hooks/useAuth";
-import UploadLayout from "@/components/UploadLayout";
+import { useUploadPage } from "../../hooks/useUploadPage";
+import UploadLayout from "../../components/UploadLayout";
 import { PageContainer, MessageCard, Title, Description, StyledButton } from "./styled";
 import { Typography } from "@imspdr/ui";
 
-type Status = "checking" | "need-login" | "checking-admin" | "not-admin" | "allowed";
-
 export default function UploadGate() {
-  const user = useAuth();
-  const [status, setStatus] = useState<Status>("checking");
-
-  useEffect(() => {
-    if (user === undefined) {
-      setStatus("checking");
-      return;
-    }
-
-    if (user === null) {
-      setStatus("need-login");
-      return;
-    }
-
-    setStatus("checking-admin");
-    checkIsAdmin(user.uid).then((isAdmin) => {
-      setStatus(isAdmin ? "allowed" : "not-admin");
-    });
-  }, [user]);
+  const { status, loginWithGoogle } = useUploadPage();
 
   // 인증 상태 확인 중
   if (status === "checking") {
