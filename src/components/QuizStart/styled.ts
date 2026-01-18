@@ -14,15 +14,11 @@ export const Container = styled.div`
 `;
 
 export const QuizCard = styled.div`
-  background: var(--imspdr-background-bg1);
-  border: 1px solid var(--imspdr-border-border1);
-  border-radius: 16px;
-  padding: 32px;
   width: 100%;
+  padding: 32px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
 `;
 
@@ -35,10 +31,5 @@ export const StartButton = styled.button`
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-  &:hover {
-    opacity: 0.9;
-  }
+  box-shadow: none;
 `;

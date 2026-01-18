@@ -15,15 +15,11 @@ export const Container = styled.div`
 `;
 
 export const QuizCard = styled.div`
-  background: var(--imspdr-background-bg1);
-  border: 1px solid var(--imspdr-border-border1);
-  border-radius: 16px;
-  padding: 32px;
   width: 100%;
+  padding: 32px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
 `;
 
@@ -64,26 +60,16 @@ export const OptionsGrid = styled.div`
 `;
 
 export const OptionButton = styled.button`
-  background: var(--imspdr-background-bg2);
+  background-color: var(--imspdr-background-bg1);
   border: 1px solid var(--imspdr-border-border1);
   border-radius: 12px;
   padding: 20px 16px;
   cursor: pointer;
-  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   width: 100%;
   box-sizing: border-box;
-
-  &:hover {
-    background: var(--imspdr-background-bg3);
-    transform: translateY(-2px);
-    border-color: var(--imspdr-mint-mint1);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
+  box-shadow: none;
 `;

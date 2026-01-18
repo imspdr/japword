@@ -2,16 +2,14 @@ import { FC, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth, checkIsAdmin } from '../../hooks/useAuth';
 import { useWords, WordWithId, deleteWord } from '../../hooks/useWords';
-import { Typography, useToast } from '@imspdr/ui';
+import { Typography, useToast, useModal, Button, Stack } from '@imspdr/ui';
 import {
   Container,
-  BackButton,
   DetailCard,
   KanjiDisplay,
   InfoRow,
-  Label,
   Value,
-  DeleteButton
+  DateCaption
 } from './styled';
 
 const DetailPage: FC = () => {
@@ -19,6 +17,7 @@ const DetailPage: FC = () => {
   const navigate = useNavigate();
   const user = useAuth();
   const { showToast } = useToast();
+  const { openModal, closeModal } = useModal();
   const { data: words, isLoading, refetch } = useWords();
   const [word, setWord] = useState<WordWithId | undefined>(undefined);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -42,20 +41,42 @@ const DetailPage: FC = () => {
     navigate(-1);
   };
 
-  const handleDelete = async () => {
-    if (!word || !isAdmin) return;
-    if (!window.confirm('정말 이 단어를 삭제하시겠습니까?')) return;
-
+  const executeDelete = async () => {
+    if (!word) return;
     try {
       await deleteWord(word.id);
       showToast('단어가 삭제되었습니다.');
-      await refetch(); // refresh list
+      await refetch();
+      closeModal();
       navigate('/list');
     } catch (error) {
       console.error(error);
       showToast('삭제 중 오류가 발생했습니다.');
+      closeModal();
     }
   };
+
+  const handleDelete = () => {
+    if (!word || !isAdmin) return;
+
+    openModal(
+      <Typography variant="body" level={1}>
+        정말 이 단어를 삭제하시겠습니까?<br />
+        삭제된 데이터는 복구할 수 없습니다.
+      </Typography>,
+      {
+        title: '단어 삭제',
+        footer: (
+          <Stack direction="row" gap="12px">
+            <Button variant="outlined" onClick={() => closeModal()}>취소</Button>
+            <Button onClick={executeDelete} style={{ background: '#ff4d4f', borderColor: '#ff4d4f', color: 'white' }}>삭제</Button>
+          </Stack>
+        )
+      }
+    );
+  };
+
+  // ... rest of the component
 
   if (isLoading) {
     return (
@@ -68,7 +89,7 @@ const DetailPage: FC = () => {
   if (!word) {
     return (
       <Container>
-        <BackButton onClick={handleBack}>← 돌아가기</BackButton>
+        <Button variant="outlined" onClick={handleBack}>← 돌아가기</Button>
         <Typography variant="body" level={1}>단어를 찾을 수 없습니다.</Typography>
       </Container>
     );
@@ -76,48 +97,49 @@ const DetailPage: FC = () => {
 
   return (
     <Container>
-      <BackButton onClick={handleBack}>
-        <Typography variant="body" level={2}>목록으로 돌아가기</Typography>
-      </BackButton>
-
       <DetailCard>
+        {/* Top: Kanji */}
         <KanjiDisplay variant="title" level={1} style={{ fontSize: '4rem' }}>
           {word.char || word.jp}
         </KanjiDisplay>
 
+        {/* Second Row: Reading & Meaning */}
         <InfoRow>
-          <Label variant="body" level={2}>일본어 표기 / 읽는 법</Label>
-          <Value variant="title" level={3}>
-            {word.char ? `${word.char} [${word.jp}]` : word.jp}
+          <Value variant="title" level={2} style={{ textAlign: 'center' }}>
+            {word.jp}
+          </Value>
+          <Value variant="title" level={3} style={{ textAlign: 'center', color: 'var(--imspdr-foreground-fg2)' }}>
+            {word.ko}
           </Value>
         </InfoRow>
 
-        <InfoRow>
-          <Label variant="body" level={2}>한국어 뜻</Label>
-          <Value variant="title" level={3}>{word.ko}</Value>
-        </InfoRow>
-
+        {/* Third Row: Description */}
         {word.description && (
           <InfoRow>
-            <Label variant="body" level={2}>설명 / 예문</Label>
-            <Value variant="body" level={1}>{word.description}</Value>
+            <Value variant="body" level={1} style={{ textAlign: 'center' }}>
+              {word.description}
+            </Value>
           </InfoRow>
         )}
 
-        <InfoRow>
-          <Label variant="body" level={2}>등록일</Label>
-          <Value variant="body" level={2}>
-            {word.createdAt.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')}
-          </Value>
-        </InfoRow>
+        {/* Date Caption */}
+        <DateCaption variant="caption" level={1}>
+          등록일: {word.createdAt.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')}
+        </DateCaption>
 
-        {isAdmin && (
-          <DeleteButton onClick={handleDelete}>
-            삭제하기
-          </DeleteButton>
-        )}
+        {/* Action Row */}
+        <Stack direction="row" gap="12px">
+          <Button variant="outlined" onClick={handleBack}>
+            목록으로 돌아가기
+          </Button>
+          {isAdmin && (
+            <Button onClick={handleDelete} style={{ background: '#ff4d4f', borderColor: '#ff4d4f', color: 'white' }}>
+              삭제하기
+            </Button>
+          )}
+        </Stack>
       </DetailCard>
-    </Container>
+    </Container >
   );
 };
 
