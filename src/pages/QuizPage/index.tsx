@@ -33,7 +33,12 @@ const QuizPage: FC = () => {
       .slice(0, QUESTIONS_PER_QUIZ);
 
     const generatedQuestions: Question[] = shuffledWords.map((word) => {
-      const types = ['kanji-to-meaning', 'kanji-to-reading', 'reading-to-meaning'] as const;
+      // If no char (Kanji), valid types are only meaning related. 
+      // 'kanji-to-meaning' will use jp as question, 'reading-to-meaning' uses jp as question.
+      const types = !word.char
+        ? ['reading-to-meaning'] as const
+        : ['kanji-to-meaning', 'kanji-to-reading', 'reading-to-meaning'] as const;
+
       const type = types[Math.floor(Math.random() * types.length)];
 
       let questionText = '';
@@ -53,16 +58,8 @@ const QuizPage: FC = () => {
         options = generateOptions(word.ko, words.map(w => w.ko));
       } else if (type === 'kanji-to-reading') {
         questionText = word.char || word.ko; // If no char, maybe this type isn't valid? But most have char.
-        // If char is empty, it's just hiragana, so asking reading is trivial (it's itself).
-        // Let's force hiragana->meaning if no char.
-        if (!word.char) {
-          questionText = word.jp;
-          correctAnswer = word.ko;
-          options = generateOptions(word.ko, words.map(w => w.ko));
-        } else {
-          correctAnswer = word.jp;
-          options = generateOptions(word.jp, words.map(w => w.jp));
-        }
+        correctAnswer = word.jp;
+        options = generateOptions(word.jp, words.map(w => w.jp));
       } else { // reading-to-meaning
         questionText = word.jp;
         correctAnswer = word.ko;
