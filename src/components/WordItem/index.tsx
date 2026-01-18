@@ -20,15 +20,18 @@ const WordItem: FC<WordItemProps> = ({ word }) => {
     navigate(`/detail/${word.id}`);
   };
 
+  const displayMain = word.char || word.jp;
+  const displaySub = word.char ? word.jp : undefined;
+
   return (
     <CardContainer onClick={handleClick}>
       <InfoGroup>
         <WordJP variant="title" level={3}>
-          {word.char}
+          {displayMain}
         </WordJP>
-        <WordChar variant="body" level={2}>
-          [{word.jp}]
-        </WordChar>
+        {displaySub && <WordChar variant="body" level={2}>
+          [{displaySub}]
+        </WordChar>}
       </InfoGroup>
       <WordKO variant="body" level={1}>
         {word.ko}

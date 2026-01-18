@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
@@ -15,7 +15,6 @@ export const Container = styled.div`
 
 export const QuizCard = styled.div`
   width: 100%;
-  padding: 32px 0;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -8,7 +8,7 @@ import {
 } from '../../store/quizAtom';
 import {
   Container,
-  ResultContainer,
+  QuizCard,
   ScoreText,
   FailedList,
   FailedItem,
@@ -26,7 +26,7 @@ const QuizResult: FC<QuizResultProps> = ({ onRetry }) => {
 
   return (
     <Container>
-      <ResultContainer>
+      <QuizCard>
         <Typography variant="title" level={2}>
           퀴즈 결과
         </Typography>
@@ -55,7 +55,7 @@ const QuizResult: FC<QuizResultProps> = ({ onRetry }) => {
         )}
 
         <StartButton onClick={onRetry}>다시 도전</StartButton>
-      </ResultContainer>
+      </QuizCard>
     </Container>
   );
 };

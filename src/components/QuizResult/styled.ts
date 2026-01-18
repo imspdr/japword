@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
@@ -16,15 +16,10 @@ export const Container = styled.div`
 
 export const QuizCard = styled.div`
   width: 100%;
-  padding: 32px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-`;
-
-export const ResultContainer = styled(QuizCard)`
-  gap: 24px;
 `;
 
 export const ScoreText = styled(Typography)`
@@ -41,7 +36,6 @@ export const FailedList = styled.ul`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 `;
 
 export const FailedItem = styled.li`
@@ -49,7 +43,9 @@ export const FailedItem = styled.li`
   padding: 12px 16px;
   border-radius: 8px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 4px;
 `;
 

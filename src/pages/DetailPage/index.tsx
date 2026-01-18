@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth, checkIsAdmin } from '../../hooks/useAuth';
 import { useWords, WordWithId, deleteWord } from '../../hooks/useWords';
 import { Typography, useToast, useModal, Button, Stack } from '@imspdr/ui';
+import { FaVolumeUp } from 'react-icons/fa';
 import {
   Container,
   DetailCard,
@@ -76,7 +77,15 @@ const DetailPage: FC = () => {
     );
   };
 
-  // ... rest of the component
+  const handleSpeak = () => {
+    if (!word) return;
+    const textToSpeak = word.jp || word.char;
+    if (!textToSpeak) return;
+
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = 'ja-JP';
+    window.speechSynthesis.speak(utterance);
+  };
 
   if (isLoading) {
     return (
@@ -99,15 +108,27 @@ const DetailPage: FC = () => {
     <Container>
       <DetailCard>
         {/* Top: Kanji */}
-        <KanjiDisplay variant="title" level={1} style={{ fontSize: '4rem' }}>
-          {word.char || word.jp}
-        </KanjiDisplay>
+        <Stack direction="row" alignItems="center" justifyContent="center" gap="10px">
+          <KanjiDisplay variant="title" level={1} style={{ fontSize: '4rem' }}>
+            {word.char || word.jp}
+          </KanjiDisplay>
+          <Button
+            variant="ghost"
+            onClick={handleSpeak}
+            style={{ padding: '8px', borderRadius: '50%', minWidth: 'auto' }}
+            aria-label="Listen"
+          >
+            <FaVolumeUp size={24} color="var(--imspdr-foreground-fg2)" />
+          </Button>
+        </Stack>
 
         {/* Second Row: Reading & Meaning */}
         <InfoRow>
-          <Value variant="title" level={2} style={{ textAlign: 'center' }}>
-            {word.jp}
-          </Value>
+          {word.char && (
+            <Value variant="title" level={2} style={{ textAlign: 'center' }}>
+              {word.jp}
+            </Value>
+          )}
           <Value variant="title" level={3} style={{ textAlign: 'center', color: 'var(--imspdr-foreground-fg2)' }}>
             {word.ko}
           </Value>
