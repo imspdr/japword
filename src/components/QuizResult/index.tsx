@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useAtomValue } from 'jotai';
-import { Typography } from '@imspdr/ui';
+import { Typography, Button } from '@imspdr/ui';
 import {
   quizScoreAtom,
   quizQuestionsAtom,
@@ -12,7 +12,6 @@ import {
   ScoreText,
   FailedList,
   FailedItem,
-  StartButton
 } from './styled';
 
 interface QuizResultProps {
@@ -54,7 +53,9 @@ const QuizResult: FC<QuizResultProps> = ({ onRetry }) => {
           </div>
         )}
 
-        <StartButton onClick={onRetry}>다시 도전</StartButton>
+        <Button onClick={onRetry}>
+          다시 도전
+        </Button>
       </QuizCard>
     </Container>
   );

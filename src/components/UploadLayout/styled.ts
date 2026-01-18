@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Typography } from "@imspdr/ui";
+import { Typography, Button } from "@imspdr/ui";
 
 export const Container = styled.div`
   padding: 20px;
@@ -63,31 +63,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const SubmitButton = styled.button`
-  margin-top: 16px;
-  padding: 12px;
-  background: var(--imspdr-mint-mint1);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: opacity 0.2s;
-
-  @media (hover: hover) {
-    &:hover {
-      opacity: 0.9;
-    }
-  }
-
-  &:disabled {
-    background: var(--imspdr-background-bg3);
-    cursor: not-allowed;
-  }
-`;
 
 export const ButtonText = styled(Typography)`
   color: white;

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { Typography } from '@imspdr/ui';
+import { Typography, Button } from '@imspdr/ui';
 import {
   currentQuestionAtom,
   quizCurrentIndexAtom,
@@ -15,7 +15,6 @@ import {
   QuestionLabel,
   QuestionText,
   OptionsGrid,
-  OptionButton
 } from './styled';
 
 interface QuizGameProps {
@@ -56,11 +55,11 @@ const QuizGame: FC<QuizGameProps> = ({ onAnswer }) => {
 
         <OptionsGrid>
           {question.options.map((option, idx) => (
-            <OptionButton key={idx} onClick={() => onAnswer(option)}>
+            <Button key={idx} onClick={() => onAnswer(option)} style={{ padding: '20px 16px', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', borderRadius: '12px', border: '1px solid var(--imspdr-border-border1)', background: 'var(--imspdr-background-bg1)' }}>
               <Typography variant="body" level={1}>
                 {option}
               </Typography>
-            </OptionButton>
+            </Button>
           ))}
         </OptionsGrid>
       </QuizCard>

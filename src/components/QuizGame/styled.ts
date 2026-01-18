@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Typography } from "@imspdr/ui";
+import { Typography, Button } from "@imspdr/ui";
 
 export const Container = styled.div`
   display: flex;
@@ -58,17 +58,4 @@ export const OptionsGrid = styled.div`
   }
 `;
 
-export const OptionButton = styled.button`
-  background-color: var(--imspdr-background-bg1);
-  border: 1px solid var(--imspdr-border-border1);
-  border-radius: 12px;
-  padding: 20px 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-  box-sizing: border-box;
-  box-shadow: none;
-`;
+

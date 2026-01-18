@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { Typography } from '@imspdr/ui';
+import { Typography, Button } from '@imspdr/ui';
 import {
   Container,
   QuizCard,
-  StartButton
 } from './styled';
 
 interface QuizStartProps {
@@ -23,7 +22,9 @@ const QuizStart: FC<QuizStartProps> = ({ onStart }) => {
           총 {QUESTIONS_PER_QUIZ}문제의 퀴즈를 풀어보세요.<br />
           등록된 단어 중 랜덤으로 출제됩니다.
         </Typography>
-        <StartButton onClick={onStart}>시작하기</StartButton>
+        <Button onClick={onStart}>
+          시작하기
+        </Button>
       </QuizCard>
     </Container>
   );

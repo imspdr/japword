@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Button } from "@imspdr/ui";
 
 export const Container = styled.div`
   display: flex;
@@ -21,14 +22,4 @@ export const QuizCard = styled.div`
   box-sizing: border-box;
 `;
 
-export const StartButton = styled.button`
-  background: var(--imspdr-mint-mint1);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 16px 48px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: none;
-`;
+

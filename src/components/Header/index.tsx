@@ -1,4 +1,4 @@
-import { ThemeToggleButton, Typography } from '@imspdr/ui';
+import { ThemeToggleButton, Typography, Button } from '@imspdr/ui';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuth, logout } from '../../hooks/useAuth';
@@ -6,9 +6,7 @@ import {
   HeaderContainer,
   HeaderContent,
   RightSection,
-  TitleButton,
   TitleSection,
-  SignOutButton
 } from './styled';
 
 interface HeaderProps {
@@ -35,19 +33,19 @@ const Header = ({ onHomeClick }: HeaderProps) => {
     <HeaderContainer>
       <HeaderContent>
         <TitleSection>
-          <TitleButton onClick={handleHomeClick}>
+          <Button variant="ghost" onClick={handleHomeClick} style={{ backgroundColor: 'var(--imspdr-background-bg1)', border: 'none' }}>
             <Typography variant="title" level={2}>
               일본어 연습
             </Typography>
-          </TitleButton>
+          </Button>
         </TitleSection>
         <RightSection>
           {user && (
-            <SignOutButton onClick={handleLogout}>
+            <Button variant="ghost" onClick={handleLogout} style={{ backgroundColor: 'var(--imspdr-background-bg1)', border: 'none' }}>
               <Typography variant="body" size="medium" color="default">
                 로그아웃
               </Typography>
-            </SignOutButton>
+            </Button>
           )}
           <ThemeToggleButton />
         </RightSection>

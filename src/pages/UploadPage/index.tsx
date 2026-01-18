@@ -1,7 +1,7 @@
 import { useUploadPage } from "../../hooks/useUploadPage";
 import UploadLayout from "../../components/UploadLayout";
-import { PageContainer, MessageCard, Title, Description, StyledButton } from "./styled";
-import { Typography } from "@imspdr/ui";
+import { PageContainer, MessageCard, Title, Description } from "./styled";
+import { Typography, Button } from "@imspdr/ui";
 
 export default function UploadGate() {
   const { status, loginWithGoogle } = useUploadPage();
@@ -30,11 +30,11 @@ export default function UploadGate() {
           <Description variant="body" level={1}>
             단어 업로드는 관리자만 가능합니다.
           </Description>
-          <StyledButton onClick={loginWithGoogle}>
+          <Button onClick={loginWithGoogle}>
             <Typography variant="body" level={1}>
               Google 로그인
             </Typography>
-          </StyledButton>
+          </Button>
         </MessageCard>
       </PageContainer>
     );

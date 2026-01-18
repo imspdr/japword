@@ -1,7 +1,7 @@
 import { FC, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addWord, useWords } from "../../hooks/useWords";
-import { useToast } from "@imspdr/ui";
+import { useToast, Button } from "@imspdr/ui";
 import { useQueryClient } from "@tanstack/react-query";
 import { bind, unbind } from 'wanakana';
 import {
@@ -10,7 +10,6 @@ import {
   Input,
   InputGroup,
   Label,
-  SubmitButton,
   TextArea,
   Title,
   ButtonText,
@@ -145,11 +144,11 @@ const UploadLayout: FC = () => {
             autoComplete="off"
           />
         </InputGroup>
-        <SubmitButton type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting} style={{ marginTop: '16px', padding: '12px', background: 'var(--imspdr-mint-mint1)', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <ButtonText variant="body" level={1}>
             {isSubmitting ? "등록 중..." : "등록하기"}
           </ButtonText>
-        </SubmitButton>
+        </Button>
       </Form>
     </Container>
   );
