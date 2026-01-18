@@ -1,16 +1,46 @@
-import { FC } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import { Typography } from "@imspdr/ui";
 import { useWords } from "../../hooks/useWords";
+import { bind, unbind, toKana } from 'wanakana';
 import {
   GridList,
   LoadingContainer,
   PageContainer,
+  SearchContainer,
+  SearchInput,
 } from "./styled";
 import WordItem from "../../components/WordItem";
 import ListActions from "../../components/ListActions";
 
 const ListPage: FC = () => {
   const { data: words, isLoading, isError } = useWords();
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (searchInputRef.current) {
+      bind(searchInputRef.current);
+    }
+    return () => {
+      if (searchInputRef.current) unbind(searchInputRef.current);
+    };
+  }, []);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(toKana(e.target.value));
+  };
+
+  const handleCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
+    setSearchTerm(toKana(e.currentTarget.value));
+  };
+
+  const filteredWords = words?.filter((word) => {
+    if (!searchTerm) return true;
+    // Normalize both for comparison (remove whitespace)
+    const normalizedSearch = searchTerm.replace(/\s+/g, '');
+    const normalizedJp = word.jp.replace(/\s+/g, '');
+    return normalizedJp.includes(normalizedSearch);
+  });
 
   if (isLoading) {
     return (
@@ -34,10 +64,22 @@ const ListPage: FC = () => {
 
   return (
     <PageContainer>
+
+      <SearchContainer>
+        <SearchInput
+          ref={searchInputRef}
+          value={searchTerm}
+          onChange={handleSearch}
+          onCompositionEnd={handleCompositionEnd}
+          placeholder="단어 검색 (일본어)"
+          autoComplete="off"
+        />
+      </SearchContainer>
+
       <ListActions />
 
       <GridList>
-        {words?.map((word) => (
+        {filteredWords?.map((word) => (
           <WordItem key={word.id} word={word} />
         ))}
       </GridList>

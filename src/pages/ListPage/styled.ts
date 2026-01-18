@@ -29,8 +29,28 @@ export const LoadingContainer = styled.div`
   color: var(--imspdr-foreground-fg2);
 `;
 
+export const SearchContainer = styled.div`
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 24px;
+`;
 
+export const SearchInput = styled.input`
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid var(--imspdr-border-border1);
+  border-radius: 12px;
+  background: var(--imspdr-background-bg1);
+  color: var(--imspdr-foreground-fg1);
+  outline: none;
+  transition: all 0.2s ease;
 
+  &:focus {
+    border-color: var(--imspdr-mint-mint1);
+  }
 
-
-
+  &::placeholder {
+    color: var(--imspdr-foreground-fg2);
+  }
+`;

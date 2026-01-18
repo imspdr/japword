@@ -1,6 +1,6 @@
 import { FC, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { addWord } from "../../hooks/useWords";
+import { addWord, useWords } from "../../hooks/useWords";
 import { useToast } from "@imspdr/ui";
 import { useQueryClient } from "@tanstack/react-query";
 import { bind, unbind } from 'wanakana';
@@ -21,6 +21,7 @@ const UploadLayout: FC = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
   const queryClient = useQueryClient();
+  const { data: words } = useWords();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const jpInputRef = useRef<HTMLInputElement>(null);
   const charInputRef = useRef<HTMLInputElement>(null);
@@ -66,6 +67,18 @@ const UploadLayout: FC = () => {
       return;
     }
 
+    // Duplicate Check
+    const normalizedInput = formData.jp.replace(/\s+/g, '');
+    const isDuplicate = words?.some((word) => {
+      const normalizedWord = word.jp.replace(/\s+/g, '');
+      return normalizedWord === normalizedInput;
+    });
+
+    if (isDuplicate) {
+      showToast("이미 등록된 단어입니다.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       await addWord({
@@ -92,7 +105,7 @@ const UploadLayout: FC = () => {
       <Form onSubmit={handleSubmit}>
         <InputGroup>
           <Label variant="body" level={2}>
-            일본어 단어 (한자/표기)
+            일본어 특수 표기 (한자/가타카나)
           </Label>
           <KanjiInput
             ref={charInputRef}
@@ -106,7 +119,7 @@ const UploadLayout: FC = () => {
 
         <InputGroup>
           <Label variant="body" level={2}>
-            읽는 법 (히라가나/가타카나) - 필수
+            읽는 법 - 히라가나 (필수)
           </Label>
           <Input
             ref={jpInputRef}
@@ -132,19 +145,6 @@ const UploadLayout: FC = () => {
             autoComplete="off"
           />
         </InputGroup>
-
-        <InputGroup>
-          <Label variant="body" level={2}>
-            설명/예문
-          </Label>
-          <TextArea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="상세 설명이나 예문을 입력하세요."
-          />
-        </InputGroup>
-
         <SubmitButton type="submit" disabled={isSubmitting}>
           <ButtonText variant="body" level={1}>
             {isSubmitting ? "등록 중..." : "등록하기"}
