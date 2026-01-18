@@ -14,6 +14,7 @@ import {
   Title,
   ButtonText,
 } from "./styled";
+import KanjiInput from "../KanjiInput";
 
 const UploadLayout: FC = () => {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ const UploadLayout: FC = () => {
           <Label variant="body" level={2}>
             일본어 단어 (한자/표기)
           </Label>
-          <Input
+          <KanjiInput
             ref={charInputRef}
             name="char"
             value={formData.char}

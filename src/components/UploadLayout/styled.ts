@@ -30,6 +30,8 @@ export const Label = styled(Typography)`
 `;
 
 export const Input = styled.input`
+  width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   border-radius: 8px;
   border: 1px solid var(--imspdr-border-border1);
@@ -44,6 +46,8 @@ export const Input = styled.input`
 `;
 
 export const TextArea = styled.textarea`
+  width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   border-radius: 8px;
   border: 1px solid var(--imspdr-border-border1);
