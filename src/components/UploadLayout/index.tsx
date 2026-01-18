@@ -48,6 +48,16 @@ const UploadLayout: FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -103,6 +113,8 @@ const UploadLayout: FC = () => {
             name="jp"
             value={formData.jp}
             onChange={handleChange}
+            onCompositionEnd={handleCompositionEnd}
+            onBlur={handleBlur}
             placeholder="예: ねこ"
             autoComplete="off"
           />

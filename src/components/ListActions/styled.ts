@@ -10,7 +10,7 @@ export const ButtonGroup = styled.div`
 export const ActionButton = styled.button`
   background: var(--imspdr-background-bg1);
   border: 1px solid var(--imspdr-border-border2);
-  padding: 14px 32px;
+  padding: 6px 12px;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
