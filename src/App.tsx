@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
 });
 
 const App: FC = () => {
-  const basename = process.env.NODE_ENV === "production" ? "/kospi200" : "/";
+  const basename = process.env.NODE_ENV === "production" ? "/japword" : "/";
 
   return (
     <QueryClientProvider client={queryClient}>
