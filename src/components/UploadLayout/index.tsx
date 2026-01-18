@@ -2,6 +2,7 @@ import { FC, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addWord } from "../../hooks/useWords";
 import { useToast } from "@imspdr/ui";
+import { useQueryClient } from "@tanstack/react-query";
 import { bind, unbind } from 'wanakana';
 import {
   Container,
@@ -19,6 +20,7 @@ import KanjiInput from "../KanjiInput";
 const UploadLayout: FC = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const queryClient = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const jpInputRef = useRef<HTMLInputElement>(null);
   const charInputRef = useRef<HTMLInputElement>(null);
@@ -60,6 +62,8 @@ const UploadLayout: FC = () => {
         ...formData,
         creator: "system",
       });
+      // Invalidate the words query to trigger a refetch
+      await queryClient.invalidateQueries({ queryKey: ['words'] });
       showToast("단어가 성공적으로 등록되었습니다.");
       navigate("/list");
     } catch (error) {

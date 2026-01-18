@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, orderBy, query } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import { useQuery } from '@tanstack/react-query';
 
@@ -43,4 +43,8 @@ export const addWord = async (word: Omit<Word, 'id' | 'createdAt'>) => {
     createdAt: yyyymmdd,
   });
   return docRef.id;
+};
+
+export const deleteWord = async (id: string) => {
+  await deleteDoc(doc(db, "words", id));
 };

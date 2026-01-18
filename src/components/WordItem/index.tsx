@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { WordWithId } from '../../hooks/useWords';
 import {
   CardContainer,
@@ -13,8 +14,14 @@ interface WordItemProps {
 }
 
 const WordItem: FC<WordItemProps> = ({ word }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/detail/${word.id}`);
+  };
+
   return (
-    <CardContainer>
+    <CardContainer onClick={handleClick}>
       <InfoGroup>
         <WordJP variant="title" level={3}>
           {word.char}

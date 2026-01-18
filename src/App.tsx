@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import ListPage from "./pages/ListPage";
 import QuizPage from "./pages/QuizPage";
 import UploadPage from "./pages/UploadPage";
+import DetailPage from "./pages/DetailPage";
 import { LayoutContainer, MainContent } from "./styled";
 
 const queryClient = new QueryClient({
@@ -49,6 +50,7 @@ const AppLayout: FC = () => {
           <Route path="/list" element={<ListPage />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/upload" element={<UploadPage />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="/" element={<Navigate to="/list" replace />} />
         </Routes>
       </MainContent>

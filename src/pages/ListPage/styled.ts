@@ -11,7 +11,7 @@ export const GridList = styled.ul`
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 12px;
   max-width: 1440px;
 
   @media (min-width: 768px) {

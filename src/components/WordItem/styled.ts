@@ -1,24 +1,21 @@
 import styled from '@emotion/styled';
 import { Typography } from '@imspdr/ui';
 
-export const CardContainer = styled.li`
-  background-color: var(--imspdr-background-bg1);
-  padding: 16px 24px;
-  border-radius: 12px;
+export const CardContainer = styled.div`
+  background: var(--imspdr-background-bg1);
   border: 1px solid var(--imspdr-border-border1);
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
 
-  @media (hover: hover) {
-    &:hover {
-      transform: translateY(-2px);
-      border-color: var(--imspdr-primary-main);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--imspdr-mint-mint1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -30,7 +27,7 @@ export const InfoGroup = styled.div`
 `;
 
 export const WordJP = styled(Typography)`
-  color: var(--imspdr-primary-main);
+  color: var(--imspdr-mint-mint1);
   font-weight: 700;
   font-size: 1.1rem;
 `;
