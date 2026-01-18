@@ -6,7 +6,14 @@ import { User, onAuthStateChanged } from "firebase/auth";
 
 export async function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
-  await signInWithPopup(auth, provider);
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (error: any) {
+    console.error("Login failed:", error.code, error.message);
+    if (error.code === 'auth/unauthorized-domain') {
+      console.error("Please add this domain to the Authorized Domains list in the Firebase Console.");
+    }
+  }
 }
 
 export async function logout() {
