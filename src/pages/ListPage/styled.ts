@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const PageContainer = styled.div`
   padding: 10px 20px;
@@ -17,7 +17,7 @@ export const GridList = styled.ul`
   gap: 12px;
   max-width: 1440px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 767px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
