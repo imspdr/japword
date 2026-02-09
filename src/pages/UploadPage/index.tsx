@@ -1,5 +1,5 @@
-import { useUploadPage } from "../../hooks/useUploadPage";
-import UploadLayout from "../../components/UploadLayout";
+import { useUploadPage } from "@/hooks/useUploadPage";
+import UploadLayout from "./components/UploadLayout";
 import { PageContainer, MessageCard, Title, Description } from "./styled";
 import { Typography, Button } from "@imspdr/ui";
 

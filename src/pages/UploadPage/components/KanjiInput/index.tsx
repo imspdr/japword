@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, KeyboardEvent, forwardRef, ChangeEvent, InputHTMLAttributes } from 'react';
-import { useGoogleIME } from '../../hooks/useGoogleIME';
+import { useGoogleIME } from '@/hooks/useGoogleIME';
 import {
   Container,
   Input,

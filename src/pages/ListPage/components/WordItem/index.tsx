@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { WordWithId } from '../../hooks/useWords';
+import { WordWithId } from '@/hooks/useWords';
 import {
   CardContainer,
   InfoGroup,

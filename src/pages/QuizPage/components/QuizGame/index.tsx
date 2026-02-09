@@ -6,7 +6,7 @@ import {
   quizCurrentIndexAtom,
   quizScoreAtom,
   quizQuestionsAtom
-} from '../../store/quizAtom';
+} from '@/store/quizAtom';
 import {
   Container,
   QuizCard,

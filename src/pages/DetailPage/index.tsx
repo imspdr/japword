@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useDetail } from '../../hooks/useDetail';
+import { useDetail } from '@/hooks/useDetail';
 import { Typography, useModal, Button } from '@imspdr/ui';
 import { FaVolumeUp } from 'react-icons/fa';
 import {

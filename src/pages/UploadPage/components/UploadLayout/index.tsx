@@ -1,6 +1,6 @@
 import { FC, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { addWord, useWords } from "../../hooks/useWords";
+import { addWord, useWords } from '@/hooks/useWords';
 import { useToast, Button } from "@imspdr/ui";
 import { useQueryClient } from "@tanstack/react-query";
 import { bind, unbind } from 'wanakana';

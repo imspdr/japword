@@ -5,15 +5,14 @@ import {
   quizScoreAtom,
   quizQuestionsAtom,
   quizFailedWordsAtom
-} from '../../store/quizAtom';
+} from '@/store/quizAtom';
 import {
   Container,
   QuizCard,
   ScoreText,
   FailedList,
   FailedItem,
-  FailedWordsSection,
-  FailedWordsTitle
+  FailedWordsSection
 } from './styled';
 
 interface QuizResultProps {

@@ -1,14 +1,14 @@
 import { FC } from "react";
 import { Typography } from "@imspdr/ui";
-import { useList } from "../../hooks/useList";
+import { useList } from '@/hooks/useList';
 import {
   GridList,
   LoadingContainer,
   PageContainer,
   SearchInput,
 } from "./styled";
-import WordItem from "../../components/WordItem";
-import ListActions from "../../components/ListActions";
+import WordItem from "./components/WordItem";
+import ListActions from "./components/ListActions";
 
 const ListPage: FC = () => {
   const {
