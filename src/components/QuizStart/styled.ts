@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Button } from "@imspdr/ui";
+import { Button, Typography } from "@imspdr/ui";
 
 export const Container = styled.div`
   display: flex;
@@ -20,6 +20,19 @@ export const QuizCard = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+`;
+
+export const StartTitle = styled(Typography)`
+  margin-bottom: 24px;
+  text-align: center;
+  display: block; // Typography might be span by default depending on variant, but let's encourage block behavior for title
+`;
+
+export const StartDescription = styled(Typography)`
+  margin-bottom: 32px;
+  text-align: center;
+  color: var(--imspdr-foreground-2);
+  display: block;
 `;
 
 

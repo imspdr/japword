@@ -20,10 +20,11 @@ export const QuizCard = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  gap: 32px;
 `;
 
 export const ScoreText = styled(Typography)`
-  color: var(--imspdr-mint-mint1);
+  color: var(--imspdr-primary-1);
   font-weight: 800;
 `;
 
@@ -39,13 +40,17 @@ export const FailedList = styled.ul`
 `;
 
 export const FailedItem = styled.li`
-  background: var(--imspdr-background-bg2);
-  padding: 12px 16px;
+  background: var(--imspdr-background-2);
   border-radius: 8px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 4px;
+`;
+
+export const FailedWordsSection = styled.div`
+  width: 100%;
   gap: 4px;
 `;
 

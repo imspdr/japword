@@ -12,7 +12,6 @@ import {
   Label,
   TextArea,
   Title,
-  ButtonText,
 } from "./styled";
 import KanjiInput from "../KanjiInput";
 
@@ -144,10 +143,15 @@ const UploadLayout: FC = () => {
             autoComplete="off"
           />
         </InputGroup>
-        <Button type="submit" disabled={isSubmitting} style={{ marginTop: '16px', padding: '12px', background: 'var(--imspdr-mint-mint1)', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <ButtonText variant="body" level={1}>
-            {isSubmitting ? "등록 중..." : "등록하기"}
-          </ButtonText>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          fullWidth
+          variant="contained"
+          color="primary.1"
+          size="lg"
+        >
+          {isSubmitting ? "등록 중..." : "등록하기"}
         </Button>
       </Form>
     </Container>

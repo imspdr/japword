@@ -7,8 +7,8 @@ export const HeaderContainer = styled.header`
   left: 0;
   width: 100%;
   height: 60px;
-  background-color: var(--imspdr-background-bg1);
-  border-bottom: 1px solid var(--imspdr-background-bg3);
+  background-color: var(--imspdr-background-1);
+  border-bottom: 1px solid var(--imspdr-background-3);
   z-index: 1000;
   box-sizing: border-box;
 `;
@@ -20,7 +20,7 @@ export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  box-sizing: border-box;
 `;
 
 export const TitleSection = styled.div`

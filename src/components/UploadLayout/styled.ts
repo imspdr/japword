@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const Title = styled(Typography)`
   margin-bottom: 24px;
-  color: var(--imspdr-foreground-fg1);
+  color: var(--imspdr-foreground-1);
   text-align: center;
 `;
 
@@ -26,7 +26,7 @@ export const InputGroup = styled.div`
 `;
 
 export const Label = styled(Typography)`
-  color: var(--imspdr-foreground-fg2);
+  color: var(--imspdr-foreground-2);
 `;
 
 export const Input = styled.input`
@@ -34,14 +34,14 @@ export const Input = styled.input`
   box-sizing: border-box;
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid var(--imspdr-border-border1);
-  background: var(--imspdr-background-bg1);
-  color: var(--imspdr-foreground-fg1);
+  border: 1px solid var(--imspdr-background-3);
+  background: var(--imspdr-background-1);
+  color: var(--imspdr-foreground-1);
   font-size: 16px;
   outline: none;
 
   &:focus {
-    border-color: var(--imspdr-mint-mint1);
+    border-color: var(--imspdr-primary-1);
   }
 `;
 
@@ -50,21 +50,19 @@ export const TextArea = styled.textarea`
   box-sizing: border-box;
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid var(--imspdr-border-border1);
-  background: var(--imspdr-background-bg1);
-  color: var(--imspdr-foreground-fg1);
+  border: 1px solid var(--imspdr-background-3);
+  background: var(--imspdr-background-1);
+  color: var(--imspdr-foreground-1);
   font-size: 16px;
   outline: none;
   resize: vertical;
   min-height: 100px;
 
   &:focus {
-    border-color: var(--imspdr-mint-mint1);
+    border-color: var(--imspdr-primary-1);
   }
 `;
 
 
 
-export const ButtonText = styled(Typography)`
-  color: white;
-`;
+

@@ -33,18 +33,16 @@ const Header = ({ onHomeClick }: HeaderProps) => {
     <HeaderContainer>
       <HeaderContent>
         <TitleSection>
-          <Button variant="ghost" onClick={handleHomeClick} style={{ backgroundColor: 'var(--imspdr-background-bg1)', border: 'none' }}>
-            <Typography variant="title" level={2}>
+          <Button variant="ghost" onClick={handleHomeClick}>
+            <Typography variant="title" level={2} color="foreground.1">
               일본어 연습
             </Typography>
           </Button>
         </TitleSection>
         <RightSection>
           {user && (
-            <Button variant="ghost" onClick={handleLogout} style={{ backgroundColor: 'var(--imspdr-background-bg1)', border: 'none' }}>
-              <Typography variant="body" size="medium" color="default">
-                로그아웃
-              </Typography>
+            <Button variant="ghost" onClick={handleLogout}>
+              로그아웃
             </Button>
           )}
           <ThemeToggleButton />

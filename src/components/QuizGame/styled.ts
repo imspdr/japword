@@ -28,7 +28,7 @@ export const Header = styled.div`
   justify-content: space-between;
   margin-bottom: 32px;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--imspdr-border-border1);
+  border-bottom: 1px solid var(--imspdr-background-3);
 `;
 
 export const QuestionSection = styled.div`
@@ -37,12 +37,12 @@ export const QuestionSection = styled.div`
 `;
 
 export const QuestionLabel = styled(Typography)`
-  color: var(--imspdr-foreground-fg2);
+  color: var(--imspdr-foreground-2);
   margin-bottom: 16px;
 `;
 
 export const QuestionText = styled(Typography)`
-  color: var(--imspdr-mint-mint1);
+  color: var(--imspdr-primary-1);
   font-weight: 700;
   line-height: 1.4;
 `;
@@ -55,6 +55,21 @@ export const OptionsGrid = styled.div`
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
+  }
+`;
+
+export const QuizOptionButton = styled(Button)`
+  padding: 20px 16px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--imspdr-background-3);
+  background: var(--imspdr-background-1);
+  
+  &:hover {
+      background: var(--imspdr-background-2);
   }
 `;
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useDetail } from '../../hooks/useDetail';
-import { Typography, useModal, Button, Stack } from '@imspdr/ui';
+import { Typography, useModal, Button } from '@imspdr/ui';
 import { FaVolumeUp } from 'react-icons/fa';
 import {
   Container,
@@ -8,7 +8,10 @@ import {
   KanjiDisplay,
   InfoRow,
   Value,
-  DateCaption
+  DateCaption,
+  ButtonContainer,
+  HeaderRow,
+  ModalFooter
 } from './styled';
 
 const DetailPage: FC = () => {
@@ -44,10 +47,10 @@ const DetailPage: FC = () => {
       {
         title: '단어 삭제',
         footer: (
-          <Stack direction="row" gap="12px">
+          <ModalFooter>
             <Button variant="outlined" onClick={() => closeModal()}>취소</Button>
-            <Button onClick={handleConfirmDelete} style={{ background: '#ff4d4f', borderColor: '#ff4d4f', color: 'white' }}>삭제</Button>
-          </Stack>
+            <Button onClick={handleConfirmDelete} variant="contained" color="danger.1">삭제</Button>
+          </ModalFooter>
         )
       }
     );
@@ -74,28 +77,28 @@ const DetailPage: FC = () => {
     <Container>
       <DetailCard>
         {/* Top: Kanji */}
-        <Stack direction="row" alignItems="center" justifyContent="center" gap="10px">
-          <KanjiDisplay variant="title" level={1} style={{ fontSize: '4rem' }}>
+        <HeaderRow>
+          <KanjiDisplay variant="title" level={1}>
             {word.char || word.jp}
           </KanjiDisplay>
           <Button
             variant="ghost"
+            shape="pill"
             onClick={speakWord}
-            style={{ padding: '8px', borderRadius: '50%', minWidth: 'auto' }}
             aria-label="Listen"
           >
-            <FaVolumeUp size={24} color="var(--imspdr-foreground-fg2)" />
+            <FaVolumeUp size={24} color="var(--imspdr-foreground-2)" />
           </Button>
-        </Stack>
+        </HeaderRow>
 
         {/* Second Row: Reading & Meaning */}
         <InfoRow>
           {word.char && (
-            <Value variant="title" level={2} style={{ textAlign: 'center' }}>
+            <Value variant="title" level={2}>
               {word.jp}
             </Value>
           )}
-          <Value variant="title" level={3} style={{ textAlign: 'center', color: 'var(--imspdr-foreground-fg2)' }}>
+          <Value variant="title" level={3} color="foreground.2">
             {word.ko}
           </Value>
         </InfoRow>
@@ -103,7 +106,7 @@ const DetailPage: FC = () => {
         {/* Third Row: Description */}
         {word.description && (
           <InfoRow>
-            <Value variant="body" level={1} style={{ textAlign: 'center' }}>
+            <Value variant="body" level={1}>
               {word.description}
             </Value>
           </InfoRow>
@@ -115,16 +118,16 @@ const DetailPage: FC = () => {
         </DateCaption>
 
         {/* Action Row */}
-        <Stack direction="row" gap="12px">
+        <ButtonContainer>
           <Button variant="outlined" onClick={goBack}>
             목록으로 돌아가기
           </Button>
           {isAdmin && (
-            <Button onClick={initiateDelete} style={{ background: '#ff4d4f', borderColor: '#ff4d4f', color: 'white' }}>
+            <Button onClick={initiateDelete} variant="contained" color="danger.1">
               삭제하기
             </Button>
           )}
-        </Stack>
+        </ButtonContainer>
       </DetailCard>
     </Container >
   );

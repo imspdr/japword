@@ -15,6 +15,7 @@ import {
   QuestionLabel,
   QuestionText,
   OptionsGrid,
+  QuizOptionButton
 } from './styled';
 
 interface QuizGameProps {
@@ -33,10 +34,10 @@ const QuizGame: FC<QuizGameProps> = ({ onAnswer }) => {
     <Container>
       <QuizCard>
         <Header>
-          <Typography variant="body" level={2} style={{ color: 'var(--imspdr-foreground-fg2)' }}>
+          <Typography variant="body" level={2} color="foreground.2">
             문제 {currentIndex + 1} / {totalQuestions}
           </Typography>
-          <Typography variant="body" level={2} style={{ fontWeight: 600 }}>
+          <Typography variant="body" level={2} bold>
             점수: {score}
           </Typography>
         </Header>
@@ -55,11 +56,11 @@ const QuizGame: FC<QuizGameProps> = ({ onAnswer }) => {
 
         <OptionsGrid>
           {question.options.map((option, idx) => (
-            <Button key={idx} onClick={() => onAnswer(option)} style={{ padding: '20px 16px', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', borderRadius: '12px', border: '1px solid var(--imspdr-border-border1)', background: 'var(--imspdr-background-bg1)' }}>
+            <QuizOptionButton key={idx} onClick={() => onAnswer(option)} variant="ghost">
               <Typography variant="body" level={1}>
                 {option}
               </Typography>
-            </Button>
+            </QuizOptionButton>
           ))}
         </OptionsGrid>
       </QuizCard>

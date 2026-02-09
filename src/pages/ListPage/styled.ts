@@ -29,7 +29,7 @@ export const GridList = styled.ul`
 export const LoadingContainer = styled.div`
   padding: 40px;
   text-align: center;
-  color: var(--imspdr-foreground-fg2);
+  color: var(--imspdr-foreground-2);
 `;
 
 export const SearchInput = styled.input`
@@ -37,18 +37,18 @@ export const SearchInput = styled.input`
   box-sizing: border-box;
   padding: 12px 16px;
   font-size: 16px;
-  border: 1px solid var(--imspdr-border-border1);
+  border: 1px solid var(--imspdr-background-3);
   border-radius: 12px;
-  background: var(--imspdr-background-bg1);
-  color: var(--imspdr-foreground-fg1);
+  background: var(--imspdr-background-1);
+  color: var(--imspdr-foreground-1);
   outline: none;
   transition: all 0.2s ease;
 
   &:focus {
-    border-color: var(--imspdr-mint-mint1);
+    border-color: var(--imspdr-primary-1);
   }
 
   &::placeholder {
-    color: var(--imspdr-foreground-fg2);
+    color: var(--imspdr-foreground-2);
   }
 `;

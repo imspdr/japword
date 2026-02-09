@@ -18,18 +18,20 @@ export const DetailCard = styled.div`
 `;
 
 export const KanjiDisplay = styled(Typography)`
-  color: var(--imspdr-mint-mint1);
+  color: var(--imspdr-primary-1);
   font-weight: 700;
   text-align: center;
+  font-size: 4rem;
 `;
 
 export const InfoRow = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 8px;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--imspdr-border-border1);
+  width: 100%;
+  border-bottom: 1px solid var(--imspdr-background-3);
 
   &:last-child {
     border-bottom: none;
@@ -37,19 +39,45 @@ export const InfoRow = styled.div`
 `;
 
 export const Label = styled(Typography)`
-  color: var(--imspdr-foreground-fg2);
+  color: var(--imspdr-foreground-2);
 `;
 
 export const Value = styled(Typography)`
-  color: var(--imspdr-foreground-fg1);
+  color: var(--imspdr-foreground-1);
   white-space: pre-wrap;
   line-height: 1.6;
+  text-align: center;
 `;
 
 export const DateCaption = styled(Typography)`
-  color: var(--imspdr-foreground-fg2);
+  color: var(--imspdr-foreground-2);
   font-size: 0.8rem;
   text-align: center;
+  margin-top: 16px;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const HeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  width: 100%;
+`;
+
+export const ModalFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  width: 100%;
 `;
 
 

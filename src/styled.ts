@@ -11,7 +11,7 @@ export const MainContent = styled.main`
   height: calc(100vh - 60px);
   overflow-y: auto;
   margin-top: 60px;
-  background-color: var(--imspdr-background-bg2);
+  background-color: var(--imspdr-background-2);
   transition: margin-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
 `;

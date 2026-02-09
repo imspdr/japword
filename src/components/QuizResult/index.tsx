@@ -12,6 +12,8 @@ import {
   ScoreText,
   FailedList,
   FailedItem,
+  FailedWordsSection,
+  FailedWordsTitle
 } from './styled';
 
 interface QuizResultProps {
@@ -26,34 +28,34 @@ const QuizResult: FC<QuizResultProps> = ({ onRetry }) => {
   return (
     <Container>
       <QuizCard>
-        <Typography variant="title" level={2}>
+        <Typography variant="title" level={3}>
           퀴즈 결과
         </Typography>
-        <ScoreText variant="title" level={1}>
+        <ScoreText variant="title" level={2}>
           {score} / {totalQuestions}
         </ScoreText>
 
         {failedWords.length > 0 && (
-          <div style={{ width: '100%' }}>
-            <Typography variant="body" level={2} style={{ marginBottom: 8 }}>
+          <FailedWordsSection>
+            <Typography variant="body" level={2} bold>
               틀린 단어 복습
             </Typography>
             <FailedList>
               {failedWords.map((word, idx) => (
                 <FailedItem key={`${word.id}-${idx}`}>
-                  <Typography variant="body" level={1} style={{ fontWeight: 700, color: 'var(--imspdr-mint-mint1)' }}>
+                  <Typography variant="body" level={2} bold color="primary.1">
                     {word.char ? `${word.char} (${word.jp})` : word.jp}
                   </Typography>
-                  <Typography variant="body" level={2} style={{ color: 'var(--imspdr-foreground-fg2)' }}>
+                  <Typography variant="body" level={3} color="foreground.2">
                     {word.ko}
                   </Typography>
                 </FailedItem>
               ))}
             </FailedList>
-          </div>
+          </FailedWordsSection>
         )}
 
-        <Button onClick={onRetry}>
+        <Button onClick={onRetry} fullWidth variant="contained" color="primary.1" size="md">
           다시 도전
         </Button>
       </QuizCard>
