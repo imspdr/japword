@@ -1,14 +1,13 @@
 import { FC } from "react";
 
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { ModalProvider, ThemeProvider, ToastProvider } from "@imspdr/ui";
+import { Button, Layout, ModalProvider, ThemeProvider, ToastProvider, Typography } from "@imspdr/ui";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Header from "./components/Header";
+import { logout, useAuth } from "./hooks/useAuth";
+import DetailPage from "./pages/DetailPage";
 import ListPage from "./pages/ListPage";
 import QuizPage from "./pages/QuizPage";
 import UploadPage from "./pages/UploadPage";
-import DetailPage from "./pages/DetailPage";
-import { LayoutContainer, MainContent } from "./styled";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,20 +40,32 @@ const App: FC = () => {
 
 const AppLayout: FC = () => {
   const navigate = useNavigate();
+  const user = useAuth(); // hook is already imported or needs import
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
-    <LayoutContainer>
-      <Header onHomeClick={() => navigate("/list")} />
-      <MainContent>
-        <Routes>
-          <Route path="/list" element={<ListPage />} />
-          <Route path="/quiz" element={<QuizPage />} />
-          <Route path="/upload" element={<UploadPage />} />
-          <Route path="/detail/:id" element={<DetailPage />} />
-          <Route path="/" element={<Navigate to="/list" replace />} />
-        </Routes>
-      </MainContent>
-    </LayoutContainer>
+    <Layout
+      title="일본어 연습"
+      onHomeClick={() => navigate("/list")}
+      rightContent={
+        user && (
+          <Button variant="ghost" onClick={handleLogout}>
+            로그아웃
+          </Button>
+        )
+      }
+    >
+      <Routes>
+        <Route path="/list" element={<ListPage />} />
+        <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/upload" element={<UploadPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/" element={<Navigate to="/list" replace />} />
+      </Routes>
+    </Layout>
   );
 };
 
