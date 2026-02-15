@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth, logout } from "./useAuth";
 
 export const useAppLayout = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const user = useAuth();
 
   const handleLogout = async () => {
@@ -13,9 +14,12 @@ export const useAppLayout = () => {
     navigate("/");
   };
 
+  const isListPage = pathname === "/list" || pathname === "/";
+
   return {
     user,
     handleLogout,
-    handleHomeClick
+    handleHomeClick,
+    isListPage
   };
 };

@@ -39,13 +39,13 @@ const App: FC = () => {
 };
 
 const AppLayout: FC = () => {
-  const { user, handleLogout, handleHomeClick } = useAppLayout();
+  const { user, handleLogout, handleHomeClick, isListPage } = useAppLayout();
 
   return (
     <Layout
       title="일본어 연습"
       onHomeClick={handleHomeClick}
-      middleContent={<HeaderSearch />}
+      middleContent={isListPage && <HeaderSearch />}
       rightContent={
         user && (
           <Button variant="ghost" onClick={handleLogout}>
