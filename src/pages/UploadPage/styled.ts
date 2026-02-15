@@ -9,6 +9,9 @@ export const PageContainer = styled.div`
   min-height: calc(100vh - 60px); // Subtract header height
   padding: 20px;
   box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 `;
 
 export const MessageCard = styled.div`

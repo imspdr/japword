@@ -5,7 +5,6 @@ import {
   GridList,
   LoadingContainer,
   PageContainer,
-  SearchInput,
 } from "./styled";
 import WordItem from "./components/WordItem";
 import ListActions from "./components/ListActions";
@@ -14,10 +13,6 @@ const ListPage: FC = () => {
   const {
     isLoading,
     isError,
-    searchTerm,
-    searchInputRef,
-    handleSearch,
-    handleCompositionEnd,
     filteredWords
   } = useList();
 
@@ -43,15 +38,6 @@ const ListPage: FC = () => {
 
   return (
     <PageContainer>
-      <SearchInput
-        ref={searchInputRef}
-        value={searchTerm}
-        onChange={handleSearch}
-        onCompositionEnd={handleCompositionEnd}
-        placeholder="단어 검색 (일본어)"
-        autoComplete="off"
-      />
-
       <ListActions />
 
       <GridList>

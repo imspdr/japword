@@ -1,28 +1,10 @@
-import { useState, useRef, useEffect } from "react";
-import { bind, unbind, toKana } from 'wanakana';
+import { useAtomValue } from "jotai";
 import { useWords } from "./useWords";
+import { searchTermAtom } from "@/store/searchAtom";
 
 export const useList = () => {
   const { data: words, isLoading, isError } = useWords();
-  const [searchTerm, setSearchTerm] = useState("");
-  const searchInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (searchInputRef.current) {
-      bind(searchInputRef.current);
-    }
-    return () => {
-      if (searchInputRef.current) unbind(searchInputRef.current);
-    };
-  }, []);
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(toKana(e.target.value));
-  };
-
-  const handleCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
-    setSearchTerm(toKana(e.currentTarget.value));
-  };
+  const searchTerm = useAtomValue(searchTermAtom);
 
   const filteredWords = words?.filter((word) => {
     if (!searchTerm) return true;
@@ -37,9 +19,6 @@ export const useList = () => {
     isLoading,
     isError,
     searchTerm,
-    searchInputRef,
-    handleSearch,
-    handleCompositionEnd,
     filteredWords
   };
 };

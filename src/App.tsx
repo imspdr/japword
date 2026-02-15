@@ -1,13 +1,13 @@
 import { FC } from "react";
-
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { Button, Layout, ModalProvider, ThemeProvider, ToastProvider, Typography } from "@imspdr/ui";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Button, Layout, ModalProvider, ThemeProvider, ToastProvider } from "@imspdr/ui";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { logout, useAuth } from "./hooks/useAuth";
 import DetailPage from "./pages/DetailPage";
 import ListPage from "./pages/ListPage";
 import QuizPage from "./pages/QuizPage";
 import UploadPage from "./pages/UploadPage";
+import HeaderSearch from "@/components/HeaderSearch";
+import { useAppLayout } from "./hooks/useAppLayout";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,17 +39,13 @@ const App: FC = () => {
 };
 
 const AppLayout: FC = () => {
-  const navigate = useNavigate();
-  const user = useAuth(); // hook is already imported or needs import
-
-  const handleLogout = async () => {
-    await logout();
-  };
+  const { user, handleLogout, handleHomeClick } = useAppLayout();
 
   return (
     <Layout
       title="일본어 연습"
-      onHomeClick={() => navigate("/list")}
+      onHomeClick={handleHomeClick}
+      middleContent={<HeaderSearch />}
       rightContent={
         user && (
           <Button variant="ghost" onClick={handleLogout}>
