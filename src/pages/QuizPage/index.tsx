@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useQuiz } from '@/hooks/useQuiz';
+import { useQuiz } from './hooks/useQuiz';
 import QuizStart from './components/QuizStart';
 import QuizGame from './components/QuizGame';
 import QuizResult from './components/QuizResult';

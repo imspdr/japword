@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { loginWithGoogle, useAuth, checkIsAdmin } from "./useAuth";
+import { loginWithGoogle, useAuth, checkIsAdmin } from "@/hooks/useAuth";
 
 export type UploadPageStatus = "checking" | "need-login" | "checking-admin" | "not-admin" | "allowed";
 

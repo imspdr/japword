@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAuth, checkIsAdmin } from './useAuth';
-import { useWords, deleteWord as apiDeleteWord, WordWithId } from './useWords';
+import { useAuth, checkIsAdmin } from '@/hooks/useAuth';
+import { useWords, deleteWord as apiDeleteWord, WordWithId } from '@/hooks/useWords';
 import { useToast } from '@imspdr/ui';
 
 export const useDetail = () => {

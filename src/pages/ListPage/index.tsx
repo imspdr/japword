@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Typography } from "@imspdr/ui";
-import { useList } from '@/hooks/useList';
+import { useList } from './hooks/useList';
 import {
   GridList,
   LoadingContainer,

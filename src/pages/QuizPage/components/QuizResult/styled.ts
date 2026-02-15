@@ -54,4 +54,15 @@ export const FailedWordsSection = styled.div`
   gap: 4px;
 `;
 
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+
+  & > button {
+    flex: 1;
+  }
+`;
+
 

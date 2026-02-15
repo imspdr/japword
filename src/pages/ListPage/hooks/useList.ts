@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { useWords } from "./useWords";
+import { useWords } from "@/hooks/useWords";
 import { searchTermAtom } from "@/store/searchAtom";
 
 export const useList = () => {

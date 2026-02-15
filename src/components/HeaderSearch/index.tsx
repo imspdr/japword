@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { SearchInput as UISearchInput } from "@imspdr/ui";
-import { SearchContainer } from "./styled";
+import { HiSearch } from "react-icons/hi";
+import { SearchContainer, SearchWrapper, StyledInput, IconWrapper } from "./styled";
 import { useHeaderSearch } from "./useHeaderSearch";
 
 const HeaderSearch: FC = () => {
@@ -13,14 +13,19 @@ const HeaderSearch: FC = () => {
 
   return (
     <SearchContainer>
-      <UISearchInput
-        ref={searchInputRef}
-        value={searchTerm}
-        onChange={handleChange}
-        onCompositionEnd={handleCompositionEnd}
-        placeholder="단어 검색 (일본어)"
-        autoComplete="off"
-      />
+      <SearchWrapper>
+        <StyledInput
+          ref={searchInputRef}
+          value={searchTerm}
+          onChange={handleChange}
+          onCompositionEnd={handleCompositionEnd}
+          placeholder="단어 검색 (일본어)"
+          autoComplete="off"
+        />
+        <IconWrapper>
+          <HiSearch size={16} />
+        </IconWrapper>
+      </SearchWrapper>
     </SearchContainer>
   );
 };

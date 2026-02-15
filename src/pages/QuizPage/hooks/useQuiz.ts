@@ -1,5 +1,5 @@
 import { useAtom, useSetAtom, useAtomValue } from 'jotai';
-import { useWords } from './useWords';
+import { useWords } from '@/hooks/useWords';
 import {
   quizPhaseAtom,
   quizQuestionsAtom,
@@ -7,7 +7,7 @@ import {
   quizScoreAtom,
   quizFailedWordsAtom,
   Question
-} from '../store/quizAtom';
+} from '@/store/quizAtom';
 
 const QUESTIONS_PER_QUIZ = 10;
 

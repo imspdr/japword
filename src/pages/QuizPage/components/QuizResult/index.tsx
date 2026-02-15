@@ -6,13 +6,15 @@ import {
   quizQuestionsAtom,
   quizFailedWordsAtom
 } from '@/store/quizAtom';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   QuizCard,
   ScoreText,
   FailedList,
   FailedItem,
-  FailedWordsSection
+  FailedWordsSection,
+  ButtonGroup
 } from './styled';
 
 interface QuizResultProps {
@@ -20,6 +22,7 @@ interface QuizResultProps {
 }
 
 const QuizResult: FC<QuizResultProps> = ({ onRetry }) => {
+  const navigate = useNavigate();
   const score = useAtomValue(quizScoreAtom);
   const totalQuestions = useAtomValue(quizQuestionsAtom).length;
   const failedWords = useAtomValue(quizFailedWordsAtom);
@@ -54,9 +57,14 @@ const QuizResult: FC<QuizResultProps> = ({ onRetry }) => {
           </FailedWordsSection>
         )}
 
-        <Button onClick={onRetry} fullWidth variant="contained" color="primary.1" size="md">
-          다시 도전
-        </Button>
+        <ButtonGroup>
+          <Button onClick={() => navigate('/list')} variant="outlined" color="primary.1" size="md">
+            목록으로
+          </Button>
+          <Button onClick={onRetry} variant="contained" color="primary.1" size="md">
+            다시 도전
+          </Button>
+        </ButtonGroup>
       </QuizCard>
     </Container>
   );

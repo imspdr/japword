@@ -16,12 +16,12 @@ export const useHeaderSearch = () => {
     };
   }, []);
 
-  const handleChange = (value: string) => {
-    setSearchTerm(toKana(value));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(toKana(e.target.value));
   };
 
-  const handleCompositionEnd = (value: string) => {
-    setSearchTerm(toKana(value));
+  const handleCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
+    setSearchTerm(toKana(e.currentTarget.value));
   };
 
   return {

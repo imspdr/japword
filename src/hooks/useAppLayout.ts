@@ -10,7 +10,7 @@ export const useAppLayout = () => {
   };
 
   const handleHomeClick = () => {
-    navigate("/list");
+    navigate("/");
   };
 
   return {
