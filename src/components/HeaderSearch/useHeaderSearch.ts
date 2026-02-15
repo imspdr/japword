@@ -7,26 +7,16 @@ export const useHeaderSearch = () => {
   const [searchTerm, setSearchTerm] = useAtom(searchTermAtom);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (searchInputRef.current) {
-      bind(searchInputRef.current);
-    }
-    return () => {
-      if (searchInputRef.current) unbind(searchInputRef.current);
-    };
-  }, []);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(toKana(e.target.value));
+  const handleChange = (value: string) => {
+    setSearchTerm(toKana(value || "", { IMEMode: true }));
   };
 
-  const handleCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
-    setSearchTerm(toKana(e.currentTarget.value));
+  const handleCompositionEnd = (value: string) => {
+    setSearchTerm(toKana(value || "", { IMEMode: true }));
   };
 
   return {
     searchTerm,
-    searchInputRef,
     handleChange,
     handleCompositionEnd
   };

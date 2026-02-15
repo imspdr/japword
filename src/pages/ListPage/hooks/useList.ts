@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai";
 import { useWords } from "@/hooks/useWords";
 import { searchTermAtom } from "@/store/searchAtom";
+import { toHiragana } from "wanakana";
 
 export const useList = () => {
   const { data: words, isLoading, isError } = useWords();
@@ -8,10 +9,22 @@ export const useList = () => {
 
   const filteredWords = words?.filter((word) => {
     if (!searchTerm) return true;
-    // Normalize both for comparison (remove whitespace)
-    const normalizedSearch = searchTerm.replace(/\s+/g, '');
-    const normalizedJp = word.jp.replace(/\s+/g, '');
-    return normalizedJp.includes(normalizedSearch);
+
+    const normalizedSearch = toHiragana(searchTerm.replace(/\s+/g, '')).toLowerCase();
+    const normalizedJp = toHiragana(word.jp.replace(/\s+/g, '')).toLowerCase();
+    const normalizedKo = word.ko.replace(/\s+/g, '').toLowerCase();
+    const normalizedChar = toHiragana(word.char?.replace(/\s+/g, '') || "").toLowerCase();
+
+    return (
+      /**
+       * jp: reading (kana)
+       * ko: meaning (korean)
+       * char: kanji/notation
+       */
+      normalizedJp.includes(normalizedSearch) ||
+      normalizedKo.includes(normalizedSearch) ||
+      normalizedChar.includes(normalizedSearch)
+    );
   });
 
   return {
