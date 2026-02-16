@@ -4,8 +4,8 @@ import { QuizConfig } from '../../hooks/useQuiz';
 import {
   Container,
   QuizCard,
-  StartTitle,
-  StartDescription,
+  TitleWrapper,
+  DescriptionWrapper,
   SettingsContainer,
   FormItem,
   Input,
@@ -40,17 +40,21 @@ const QuizStart: FC<QuizStartProps> = ({ onStart }) => {
   return (
     <Container>
       <QuizCard>
-        <StartTitle variant="title" level={2}>
-          단어 퀴즈
-        </StartTitle>
-        <StartDescription variant="body" level={1}>
-          등록된 단어 중 랜덤으로 출제됩니다.<br />
-          문제 수와 유형을 설정하고 시작해보세요.
-        </StartDescription>
+        <TitleWrapper>
+          <Typography variant="title" level={2} color="foreground.1">
+            단어 퀴즈
+          </Typography>
+        </TitleWrapper>
+        <DescriptionWrapper>
+          <Typography variant="body" level={1} color="foreground.2">
+            등록된 단어 중 랜덤으로 출제됩니다.<br />
+            문제 수와 유형을 설정하고 시작해보세요.
+          </Typography>
+        </DescriptionWrapper>
 
         <SettingsContainer>
           <FormItem>
-            <Typography variant="body" level={2} bold>문제 수</Typography>
+            <Typography variant="body" level={2} bold color="foreground.1">문제 수</Typography>
             <Input
               type="number"
               value={count}
@@ -59,7 +63,7 @@ const QuizStart: FC<QuizStartProps> = ({ onStart }) => {
             />
           </FormItem>
           <FormItem>
-            <Typography variant="body" level={2} bold>문제 유형</Typography>
+            <Typography variant="body" level={2} bold color="foreground.1">문제 유형</Typography>
             <CheckboxGroup>
               <CheckboxLabel>
                 <input
@@ -67,7 +71,7 @@ const QuizStart: FC<QuizStartProps> = ({ onStart }) => {
                   checked={types.includes('kanji-to-meaning')}
                   onChange={() => toggleType('kanji-to-meaning')}
                 />
-                <Typography variant="body" level={2}>한자 → 뜻</Typography>
+                <Typography variant="body" level={2} color="foreground.1">한자 → 뜻</Typography>
               </CheckboxLabel>
               <CheckboxLabel>
                 <input
@@ -75,7 +79,7 @@ const QuizStart: FC<QuizStartProps> = ({ onStart }) => {
                   checked={types.includes('kanji-to-reading')}
                   onChange={() => toggleType('kanji-to-reading')}
                 />
-                <Typography variant="body" level={2}>한자 → 읽기</Typography>
+                <Typography variant="body" level={2} color="foreground.1">한자 → 읽기</Typography>
               </CheckboxLabel>
               <CheckboxLabel>
                 <input
@@ -83,7 +87,7 @@ const QuizStart: FC<QuizStartProps> = ({ onStart }) => {
                   checked={types.includes('reading-to-meaning')}
                   onChange={() => toggleType('reading-to-meaning')}
                 />
-                <Typography variant="body" level={2}>요미가나 → 뜻</Typography>
+                <Typography variant="body" level={2} color="foreground.1">요미가나 → 뜻</Typography>
               </CheckboxLabel>
             </CheckboxGroup>
           </FormItem>
@@ -98,4 +102,3 @@ const QuizStart: FC<QuizStartProps> = ({ onStart }) => {
 };
 
 export default QuizStart;
-

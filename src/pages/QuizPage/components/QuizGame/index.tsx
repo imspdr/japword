@@ -6,9 +6,10 @@ import {
   QuizCard,
   Header,
   QuestionSection,
-  QuestionLabel,
-  QuestionText,
+  QuestionLabelWrapper,
+  QuestionTextWrapper,
   OptionsGrid,
+  OptionItem,
 } from './styled';
 
 interface QuizGameProps {
@@ -29,38 +30,42 @@ const QuizGame: FC<QuizGameProps> = ({ onAnswer, question, currentIndex, totalQu
           <Typography variant="body" level={2} color="foreground.2">
             문제 {currentIndex + 1} / {totalQuestions}
           </Typography>
-          <Typography variant="body" level={2} bold>
+          <Typography variant="body" level={2} bold color="foreground.1">
             점수: {score}
           </Typography>
         </Header>
 
         <QuestionSection>
-          <QuestionLabel variant="body" level={2}>
-            {question.type === 'kanji-to-meaning' ? '다음 단어의 뜻은?' :
-              question.type === 'kanji-to-reading' ? '다음 단어의 읽는 법은?' :
-                question.type === 'image-to-meaning' ? '이 단어의 뜻은?' :
-                  '다음 단어의 뜻은?'}
-          </QuestionLabel>
-          <QuestionText variant="title" level={1}>
-            {question.question}
-          </QuestionText>
+          <QuestionLabelWrapper>
+            <Typography variant="body" level={2} color="foreground.2">
+              {question.type === 'kanji-to-meaning' ? '다음 단어의 뜻은?' :
+                question.type === 'kanji-to-reading' ? '다음 단어의 읽는 법은?' :
+                  question.type === 'image-to-meaning' ? '이 단어의 뜻은?' :
+                    '다음 단어의 뜻은?'}
+            </Typography>
+          </QuestionLabelWrapper>
+          <QuestionTextWrapper>
+            <Typography variant="title" level={1} color="primary.1" bold>
+              {question.question}
+            </Typography>
+          </QuestionTextWrapper>
         </QuestionSection>
 
         <OptionsGrid>
           {question.options.map((option, idx) => (
-            <Button
-              key={idx}
-              onClick={() => onAnswer(option)}
-              variant="outlined"
-              color="primary.1"
-              fullWidth
-              size="lg"
-              style={{ height: 'auto', padding: '16px' }}
-            >
-              <Typography variant="body" level={1}>
-                {option}
-              </Typography>
-            </Button>
+            <OptionItem key={idx}>
+              <Button
+                onClick={() => onAnswer(option)}
+                variant="outlined"
+                color="primary.1"
+                fullWidth
+                size="lg"
+              >
+                <Typography variant="body" level={1} color="foreground.1">
+                  {option}
+                </Typography>
+              </Button>
+            </OptionItem>
           ))}
         </OptionsGrid>
       </QuizCard>
@@ -69,4 +74,3 @@ const QuizGame: FC<QuizGameProps> = ({ onAnswer, question, currentIndex, totalQu
 };
 
 export default QuizGame;
-

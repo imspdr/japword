@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Typography } from '@imspdr/ui';
 
 export const CardContainer = styled.div`
   background: var(--imspdr-background-1);
@@ -10,6 +9,11 @@ export const CardContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--imspdr-background-2);
+  }
 `;
 
 export const InfoGroup = styled.div`
@@ -19,19 +23,20 @@ export const InfoGroup = styled.div`
   flex: 1;
 `;
 
-export const WordJP = styled(Typography)`
-  color: var(--imspdr-primary-1);
-  font-weight: 700;
-  font-size: 1.1rem;
+export const MainWrapper = styled.div`
+  & > * {
+    font-weight: 700;
+  }
 `;
 
-export const WordChar = styled(Typography)`
-  color: var(--imspdr-foreground-2);
-  font-size: 0.9rem;
+export const SubWrapper = styled.div`
+  & > * {
+    opacity: 0.8;
+  }
 `;
 
-export const WordKO = styled(Typography)`
-  color: var(--imspdr-foreground-1);
-  font-weight: 500;
+export const MeaningWrapper = styled.div`
+  & > * {
+    font-weight: 500;
+  }
 `;
-

@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Typography, Button } from "@imspdr/ui";
 
 export const PageContainer = styled.div`
   display: flex;
@@ -20,7 +19,7 @@ export const MessageCard = styled.div`
   align-items: center;
   gap: 16px;
   padding: 32px;
-  background: var(--imspdr-background-bg2);
+  background: var(--imspdr-background-2);
   border-radius: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -28,14 +27,10 @@ export const MessageCard = styled.div`
   width: 100%;
 `;
 
-export const Title = styled(Typography)`
-  color: var(--imspdr-foreground-fg1);
+export const TitleWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-export const Description = styled(Typography)`
-  color: var(--imspdr-foreground-fg2);
+export const DescriptionWrapper = styled.div`
   margin-bottom: 16px;
 `;
-
-

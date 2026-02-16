@@ -5,6 +5,7 @@ import { useToast, useModal, Typography, Button } from "@imspdr/ui";
 import { useQueryClient } from "@tanstack/react-query";
 import { bind, unbind } from 'wanakana';
 import { useAuth, checkIsAdmin, loginWithGoogle } from "@/hooks/useAuth";
+import { ModalContent, ModalFooter } from "./styled";
 
 export const useUploadLayout = () => {
   const navigate = useNavigate();
@@ -99,13 +100,13 @@ export const useUploadLayout = () => {
 
   const openAdminModal = (isNotAdmin = false) => {
     openModal(
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <Typography variant="body" level={1}>
+      <ModalContent>
+        <Typography variant="body" level={1} color="foreground.1">
           {isNotAdmin
             ? "현재 계정은 관리자 권한이 없습니다. 관리자 계정으로 로그인해주세요."
             : "단어 등록은 관리자만 가능합니다. 로그인이 필요합니다."}
         </Typography>
-        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+        <ModalFooter>
           <Button variant="outlined" onClick={closeModal}>취소</Button>
           <Button variant="contained" onClick={async () => {
             await loginWithGoogle();
@@ -114,8 +115,8 @@ export const useUploadLayout = () => {
           }}>
             로그인
           </Button>
-        </div>
-      </div>,
+        </ModalFooter>
+      </ModalContent>,
       { title: "관리자 권한 필요" }
     );
   };

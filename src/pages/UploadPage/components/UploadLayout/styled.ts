@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Typography, Button } from "@imspdr/ui";
 
 export const Container = styled.div`
   padding: 20px;
@@ -7,9 +6,8 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const Title = styled(Typography)`
+export const TitleWrapper = styled.div`
   margin-bottom: 24px;
-  color: var(--imspdr-foreground-1);
   text-align: center;
 `;
 
@@ -25,8 +23,8 @@ export const InputGroup = styled.div`
   gap: 8px;
 `;
 
-export const Label = styled(Typography)`
-  color: var(--imspdr-foreground-2);
+export const LabelWrapper = styled.div`
+  margin-bottom: 4px;
 `;
 
 export const Input = styled.input`
@@ -63,6 +61,14 @@ export const TextArea = styled.textarea`
   }
 `;
 
+export const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
-
-
+export const ModalFooter = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+`;

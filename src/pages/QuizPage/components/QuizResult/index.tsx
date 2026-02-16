@@ -5,7 +5,7 @@ import { WordWithId } from '@/hooks/useWords';
 import {
   Container,
   QuizCard,
-  ScoreText,
+  ScoreWrapper,
   FailedList,
   FailedItem,
   FailedWordsSection,
@@ -25,16 +25,18 @@ const QuizResult: FC<QuizResultProps> = ({ onRetry, score, totalQuestions, faile
   return (
     <Container>
       <QuizCard>
-        <Typography variant="title" level={3}>
+        <Typography variant="title" level={3} color="foreground.1">
           퀴즈 결과
         </Typography>
-        <ScoreText variant="title" level={2}>
-          {score} / {totalQuestions}
-        </ScoreText>
+        <ScoreWrapper>
+          <Typography variant="title" level={2} color="primary.1">
+            {score} / {totalQuestions}
+          </Typography>
+        </ScoreWrapper>
 
         {failedWords.length > 0 && (
           <FailedWordsSection>
-            <Typography variant="body" level={2} bold>
+            <Typography variant="body" level={2} bold color="foreground.1">
               틀린 단어 복습
             </Typography>
             <FailedList>
@@ -66,4 +68,3 @@ const QuizResult: FC<QuizResultProps> = ({ onRetry, score, totalQuestions, faile
 };
 
 export default QuizResult;
-

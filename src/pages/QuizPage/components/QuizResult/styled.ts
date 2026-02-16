@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Typography, Button } from "@imspdr/ui";
 
 export const Container = styled.div`
   display: flex;
@@ -23,9 +22,10 @@ export const QuizCard = styled.div`
   gap: 32px;
 `;
 
-export const ScoreText = styled(Typography)`
-  color: var(--imspdr-primary-1);
-  font-weight: 800;
+export const ScoreWrapper = styled.div`
+  & > * {
+    font-weight: 800;
+  }
 `;
 
 export const FailedList = styled.ul`
@@ -47,11 +47,12 @@ export const FailedItem = styled.li`
   justify-content: space-between;
   align-items: center;
   gap: 4px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
 `;
 
 export const FailedWordsSection = styled.div`
   width: 100%;
-  gap: 4px;
 `;
 
 export const ButtonGroup = styled.div`
@@ -64,5 +65,3 @@ export const ButtonGroup = styled.div`
     flex: 1;
   }
 `;
-
-

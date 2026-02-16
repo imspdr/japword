@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Typography } from "@imspdr/ui";
 
 export const Container = styled.div`
   display: flex;
@@ -36,15 +35,14 @@ export const QuestionSection = styled.div`
   text-align: center;
 `;
 
-export const QuestionLabel = styled(Typography)`
-  color: var(--imspdr-foreground-2);
+export const QuestionLabelWrapper = styled.div`
   margin-bottom: 16px;
 `;
 
-export const QuestionText = styled(Typography)`
-  color: var(--imspdr-primary-1);
-  font-weight: 700;
-  line-height: 1.4;
+export const QuestionTextWrapper = styled.div`
+  & > * {
+    line-height: 1.4;
+  }
 `;
 
 export const OptionsGrid = styled.div`
@@ -58,4 +56,9 @@ export const OptionsGrid = styled.div`
   }
 `;
 
-
+export const OptionItem = styled.div`
+  & button {
+    height: auto !important;
+    padding: 16px !important;
+  }
+`;
