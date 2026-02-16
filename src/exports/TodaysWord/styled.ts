@@ -5,7 +5,7 @@ export const WidgetContainer = styled.div`
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
-  height: 240px;
+  height: 160px;
   background: var(--imspdr-background-1);
   border-radius: 12px;
   display: flex;
@@ -17,39 +17,17 @@ export const HeaderRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 `;
 
-export const LayoutGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  flex: 1;
-  align-items: center;
-`;
-
-export const KanjiWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  & > * {
-    font-size: 3rem !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`;
-
-export const InfoColumn = styled.div`
+export const ContentColumn = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding-left: 16px;
-  height: 80%;
+  flex: 1;
+  gap: 4px;
   overflow: hidden;
-  text-align: left;
 `;
 
 export const TextWrapper = styled.div`
@@ -59,14 +37,14 @@ export const TextWrapper = styled.div`
   width: 100%;
 `;
 
-export const DescriptionRow = styled.div`
-  margin-top: 8px;
-  padding-top: 8px;
-  width: 100%;
-`;
-
-export const MeaningRow = styled.div`
-  margin-top: 12px;
+export const KanjiWrapper = styled.div`
+  & > * {
+    font-size: 2.2rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+  }
 `;
 
 export const ButtonGroup = styled.div`

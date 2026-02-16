@@ -5,12 +5,9 @@ import { FaVolumeUp, FaSyncAlt } from 'react-icons/fa';
 import {
   WidgetContainer,
   HeaderRow,
-  LayoutGrid,
+  ContentColumn,
   KanjiWrapper,
-  InfoColumn,
   TextWrapper,
-  MeaningRow,
-  DescriptionRow,
   ButtonGroup
 } from './styled';
 
@@ -59,42 +56,32 @@ const TodaysWord: FC = () => {
         </ButtonGroup>
       </HeaderRow>
 
-      <LayoutGrid>
+      <ContentColumn>
+        {/* 1. Reading (Hiragana) - Only if Kanji exists */}
+        {word.char && (
+          <TextWrapper>
+            <Typography variant="body" level={2} color="foreground.2">
+              {word.jp}
+            </Typography>
+          </TextWrapper>
+        )}
+
+        {/* 2. Main (Kanji or Hiragana) */}
         <KanjiWrapper>
           <Typography variant="title" level={3} color="primary.1">
             {word.char || word.jp}
           </Typography>
         </KanjiWrapper>
 
-        <InfoColumn>
-          {word.char && (
-            <TextWrapper>
-              <Typography variant="body" level={1} bold>
-                {word.jp}
-              </Typography>
-            </TextWrapper>
-          )}
-        </InfoColumn>
-      </LayoutGrid>
-
-      <MeaningRow>
+        {/* 3. Meaning (Korean) */}
         <TextWrapper>
-          <Typography variant="body" level={1} color="primary.1" bold tooltip={word.ko}>
+          <Typography variant="body" level={1} bold>
             {word.ko}
           </Typography>
         </TextWrapper>
-      </MeaningRow>
-
-      {word.description && (
-        <DescriptionRow>
-          <Typography variant="caption" level={1} style={{ whiteSpace: 'pre-wrap' }}>
-            {word.description}
-          </Typography>
-        </DescriptionRow>
-      )}
+      </ContentColumn>
     </WidgetContainer>
   );
 };
-
 
 export default TodaysWord;
