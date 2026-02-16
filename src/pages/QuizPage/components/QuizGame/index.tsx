@@ -1,12 +1,6 @@
 import { FC } from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
 import { Typography, Button } from '@imspdr/ui';
-import {
-  currentQuestionAtom,
-  quizCurrentIndexAtom,
-  quizScoreAtom,
-  quizQuestionsAtom
-} from '@/store/quizAtom';
+import { Question } from '../../hooks/useQuiz';
 import {
   Container,
   QuizCard,
@@ -15,19 +9,17 @@ import {
   QuestionLabel,
   QuestionText,
   OptionsGrid,
-  QuizOptionButton
 } from './styled';
 
 interface QuizGameProps {
   onAnswer: (option: string) => void;
+  question: Question;
+  currentIndex: number;
+  totalQuestions: number;
+  score: number;
 }
 
-const QuizGame: FC<QuizGameProps> = ({ onAnswer }) => {
-  const question = useAtomValue(currentQuestionAtom);
-  const currentIndex = useAtomValue(quizCurrentIndexAtom);
-  const totalQuestions = useAtomValue(quizQuestionsAtom).length;
-  const score = useAtomValue(quizScoreAtom);
-
+const QuizGame: FC<QuizGameProps> = ({ onAnswer, question, currentIndex, totalQuestions, score }) => {
   if (!question) return null;
 
   return (
@@ -56,11 +48,19 @@ const QuizGame: FC<QuizGameProps> = ({ onAnswer }) => {
 
         <OptionsGrid>
           {question.options.map((option, idx) => (
-            <QuizOptionButton key={idx} onClick={() => onAnswer(option)} variant="ghost">
+            <Button
+              key={idx}
+              onClick={() => onAnswer(option)}
+              variant="outlined"
+              color="primary.1"
+              fullWidth
+              size="lg"
+              style={{ height: 'auto', padding: '16px' }}
+            >
               <Typography variant="body" level={1}>
                 {option}
               </Typography>
-            </QuizOptionButton>
+            </Button>
           ))}
         </OptionsGrid>
       </QuizCard>
@@ -69,3 +69,4 @@ const QuizGame: FC<QuizGameProps> = ({ onAnswer }) => {
 };
 
 export default QuizGame;
+

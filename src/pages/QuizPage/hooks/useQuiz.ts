@@ -1,41 +1,51 @@
-import { useAtom, useSetAtom, useAtomValue } from 'jotai';
-import { useWords } from '@/hooks/useWords';
-import {
-  quizPhaseAtom,
-  quizQuestionsAtom,
-  quizCurrentIndexAtom,
-  quizScoreAtom,
-  quizFailedWordsAtom,
-  Question
-} from '@/store/quizAtom';
+import { useState, useCallback } from 'react';
+import { useWords, WordWithId } from '@/hooks/useWords';
 
-const QUESTIONS_PER_QUIZ = 10;
+export interface Question {
+  word: WordWithId;
+  type: 'kanji-to-meaning' | 'kanji-to-reading' | 'reading-to-meaning' | 'image-to-meaning';
+  question: string;
+  answer: string;
+  options: string[];
+}
+
+export type QuizPhase = 'start' | 'quiz' | 'result';
+
+export interface QuizConfig {
+  questionCount: number;
+  types: ('kanji-to-meaning' | 'kanji-to-reading' | 'reading-to-meaning')[];
+}
 
 export const useQuiz = () => {
   const { data: words } = useWords();
-  const [phase, setPhase] = useAtom(quizPhaseAtom);
-  const setQuestions = useSetAtom(quizQuestionsAtom);
-  const [currentIndex, setCurrentIndex] = useAtom(quizCurrentIndexAtom);
-  const setScore = useSetAtom(quizScoreAtom);
-  const setFailedWords = useSetAtom(quizFailedWordsAtom);
-  const questions = useAtomValue(quizQuestionsAtom);
+  const [phase, setPhase] = useState<QuizPhase>('start');
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [failedWords, setFailedWords] = useState<WordWithId[]>([]);
+  const [lastConfig, setLastConfig] = useState<QuizConfig | null>(null);
 
-  const startQuiz = () => {
+  const startQuiz = useCallback((config: QuizConfig) => {
     if (!words || words.length === 0) return;
 
-    // Shuffle and pick 10 words (or less if not enough)
+    setLastConfig(config);
+
+    // Shuffle and pick requested number of words
     const shuffledWords = [...words]
       .sort(() => 0.5 - Math.random())
-      .slice(0, QUESTIONS_PER_QUIZ);
+      .slice(0, config.questionCount);
 
     const generatedQuestions: Question[] = shuffledWords.map((word) => {
-      // If no char (Kanji), valid types are only meaning related. 
-      // 'kanji-to-meaning' will use jp as question, 'reading-to-meaning' uses jp as question.
-      const types = !word.char
+      // Filter allowed types based on config and word properties
+      const wordTypes = !word.char
         ? ['reading-to-meaning'] as const
         : ['kanji-to-meaning', 'kanji-to-reading', 'reading-to-meaning'] as const;
 
-      const type = types[Math.floor(Math.random() * types.length)];
+      const allowedTypes = wordTypes.filter(t => config.types.includes(t as any));
+
+      // Fallback if no types are allowed (shouldn't happen with proper config UI, but just in case)
+      const finalTypes = allowedTypes.length > 0 ? allowedTypes : wordTypes;
+      const type = finalTypes[Math.floor(Math.random() * finalTypes.length)];
 
       let questionText = '';
       let correctAnswer = '';
@@ -45,15 +55,21 @@ export const useQuiz = () => {
       const generateOptions = (correct: string, source: string[]) => {
         const others = source.filter(s => s !== correct);
         const shuffledOthers = others.sort(() => 0.5 - Math.random()).slice(0, 3);
-        return [...shuffledOthers, correct].sort(() => 0.5 - Math.random());
+        const combined = [...shuffledOthers, correct];
+        // Ensure we have 4 options even if there are fewer words
+        while (combined.length < 4 && source.length > combined.length) {
+          const extra = source.filter(s => !combined.includes(s))[Math.floor(Math.random() * source.length)];
+          if (extra) combined.push(extra);
+        }
+        return combined.sort(() => 0.5 - Math.random());
       };
 
       if (type === 'kanji-to-meaning') {
-        questionText = word.char || word.jp; // Fallback to JP if no char
+        questionText = word.char || word.jp;
         correctAnswer = word.ko;
         options = generateOptions(word.ko, words.map(w => w.ko));
       } else if (type === 'kanji-to-reading') {
-        questionText = word.char || word.ko; // If no char, maybe this type isn't valid? But most have char.
+        questionText = word.char || word.ko;
         correctAnswer = word.jp;
         options = generateOptions(word.jp, words.map(w => w.jp));
       } else { // reading-to-meaning
@@ -64,7 +80,7 @@ export const useQuiz = () => {
 
       return {
         word,
-        type: !word.char && type === 'kanji-to-reading' ? 'image-to-meaning' : type,
+        type: !word.char && type === 'kanji-to-reading' ? 'image-to-meaning' as const : type as Question['type'],
         question: questionText,
         answer: correctAnswer,
         options
@@ -76,10 +92,12 @@ export const useQuiz = () => {
     setScore(0);
     setFailedWords([]);
     setPhase('quiz');
-  };
+  }, [words]);
 
-  const handleAnswer = (selectedOption: string) => {
+  const handleAnswer = useCallback((selectedOption: string) => {
     const currentQuestion = questions[currentIndex];
+    if (!currentQuestion) return;
+
     const isCorrect = selectedOption === currentQuestion.answer;
 
     if (isCorrect) {
@@ -93,13 +111,23 @@ export const useQuiz = () => {
     } else {
       setPhase('result');
     }
-  };
+  }, [questions, currentIndex]);
+
+  const retryQuiz = useCallback(() => {
+    if (lastConfig) {
+      startQuiz(lastConfig);
+    }
+  }, [lastConfig, startQuiz]);
 
   return {
     phase,
     questions,
     currentIndex,
+    score,
+    failedWords,
     startQuiz,
-    handleAnswer
+    handleAnswer,
+    retryQuiz
   };
 };
+

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Typography, Button } from "@imspdr/ui";
+import { Typography } from "@imspdr/ui";
 
 export const Container = styled.div`
   display: flex;
@@ -55,21 +55,6 @@ export const OptionsGrid = styled.div`
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
-  }
-`;
-
-export const QuizOptionButton = styled(Button)`
-  padding: 20px 16px;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border-radius: 12px;
-  border: 1px solid var(--imspdr-background-3);
-  background: var(--imspdr-background-1);
-  
-  &:hover {
-      background: var(--imspdr-background-2);
   }
 `;
 

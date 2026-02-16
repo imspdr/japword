@@ -1,12 +1,7 @@
 import { FC } from 'react';
-import { useAtomValue } from 'jotai';
 import { Typography, Button } from '@imspdr/ui';
-import {
-  quizScoreAtom,
-  quizQuestionsAtom,
-  quizFailedWordsAtom
-} from '@/store/quizAtom';
 import { useNavigate } from 'react-router-dom';
+import { WordWithId } from '@/hooks/useWords';
 import {
   Container,
   QuizCard,
@@ -19,13 +14,13 @@ import {
 
 interface QuizResultProps {
   onRetry: () => void;
+  score: number;
+  totalQuestions: number;
+  failedWords: WordWithId[];
 }
 
-const QuizResult: FC<QuizResultProps> = ({ onRetry }) => {
+const QuizResult: FC<QuizResultProps> = ({ onRetry, score, totalQuestions, failedWords }) => {
   const navigate = useNavigate();
-  const score = useAtomValue(quizScoreAtom);
-  const totalQuestions = useAtomValue(quizQuestionsAtom).length;
-  const failedWords = useAtomValue(quizFailedWordsAtom);
 
   return (
     <Container>
@@ -71,3 +66,4 @@ const QuizResult: FC<QuizResultProps> = ({ onRetry }) => {
 };
 
 export default QuizResult;
+
