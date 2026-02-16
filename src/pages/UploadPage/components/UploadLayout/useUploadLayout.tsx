@@ -1,15 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addWord, useWords } from '@/hooks/useWords';
-import { useToast } from "@imspdr/ui";
+import { useToast, useModal, Typography, Button } from "@imspdr/ui";
 import { useQueryClient } from "@tanstack/react-query";
 import { bind, unbind } from 'wanakana';
+import { useAuth, checkIsAdmin, loginWithGoogle } from "@/hooks/useAuth";
 
 export const useUploadLayout = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const { openModal, closeModal } = useModal();
   const queryClient = useQueryClient();
   const { data: words } = useWords();
+  const user = useAuth();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const jpInputRef = useRef<HTMLInputElement>(null);
   const charInputRef = useRef<HTMLInputElement>(null);
@@ -53,6 +57,18 @@ export const useUploadLayout = () => {
       return;
     }
 
+    // Auth check
+    if (!user) {
+      openAdminModal();
+      return;
+    }
+
+    const isAdmin = await checkIsAdmin(user.uid);
+    if (!isAdmin) {
+      openAdminModal(true);
+      return;
+    }
+
     const normalizedInput = formData.jp.replace(/\s+/g, '');
     const isDuplicate = words?.some((word) => {
       const normalizedWord = word.jp.replace(/\s+/g, '');
@@ -68,7 +84,7 @@ export const useUploadLayout = () => {
     try {
       await addWord({
         ...formData,
-        creator: "system",
+        creator: user.email || user.uid,
       });
       await queryClient.invalidateQueries({ queryKey: ['words'] });
       showToast("단어가 성공적으로 등록되었습니다.");
@@ -79,6 +95,29 @@ export const useUploadLayout = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const openAdminModal = (isNotAdmin = false) => {
+    openModal(
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <Typography variant="body" level={1}>
+          {isNotAdmin
+            ? "현재 계정은 관리자 권한이 없습니다. 관리자 계정으로 로그인해주세요."
+            : "단어 등록은 관리자만 가능합니다. 로그인이 필요합니다."}
+        </Typography>
+        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+          <Button variant="outlined" onClick={closeModal}>취소</Button>
+          <Button variant="contained" onClick={async () => {
+            await loginWithGoogle();
+            closeModal();
+            showToast("로그인되었습니다. 다시 등록하기를 눌러주세요.");
+          }}>
+            로그인
+          </Button>
+        </div>
+      </div>,
+      { title: "관리자 권한 필요" }
+    );
   };
 
   return {
@@ -92,3 +131,5 @@ export const useUploadLayout = () => {
     handleSubmit
   };
 };
+
+
