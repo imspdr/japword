@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Typography } from "@imspdr/ui";
 
 export const Container = styled.div`
   max-width: 600px;
@@ -12,47 +11,42 @@ export const Container = styled.div`
 export const DetailCard = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 12px;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: center;
 `;
 
-export const KanjiDisplay = styled(Typography)`
-  color: var(--imspdr-primary-1);
-  font-weight: 700;
-  text-align: center;
-  font-size: 4rem;
+export const KanjiWrapper = styled.div`
+  & > * {
+    font-size: 4rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const InfoRow = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding-bottom: 16px;
+  gap: 12px;
   width: 100%;
-  border-bottom: 1px solid var(--imspdr-background-3);
-
-  &:last-child {
-    border-bottom: none;
-  }
 `;
 
-export const Label = styled(Typography)`
-  color: var(--imspdr-foreground-2);
+export const TextWrapper = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 `;
 
-export const Value = styled(Typography)`
-  color: var(--imspdr-foreground-1);
-  white-space: pre-wrap;
-  line-height: 1.6;
-  text-align: center;
+export const DescriptionWrapper = styled.div`
+  width: 100%;
+  margin-top: 8px;
 `;
 
-export const DateCaption = styled(Typography)`
-  color: var(--imspdr-foreground-2);
-  font-size: 0.8rem;
-  text-align: center;
+export const DateWrapper = styled.div`
   margin-top: 16px;
 `;
 
@@ -60,17 +54,6 @@ export const ButtonContainer = styled.div`
   display: flex;
   gap: 12px;
   margin-top: 24px;
-  justify-content: center;
-  width: 100%;
-`;
-
-export const HeaderRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  position: relative;
-  width: 100%;
 `;
 
 export const ModalFooter = styled.div`
@@ -79,5 +62,3 @@ export const ModalFooter = styled.div`
   gap: 12px;
   width: 100%;
 `;
-
-

@@ -5,12 +5,12 @@ import { FaVolumeUp } from 'react-icons/fa';
 import {
   Container,
   DetailCard,
-  KanjiDisplay,
+  KanjiWrapper,
   InfoRow,
-  Value,
-  DateCaption,
+  TextWrapper,
+  DescriptionWrapper,
+  DateWrapper,
   ButtonContainer,
-  HeaderRow,
   ModalFooter
 } from './styled';
 
@@ -33,8 +33,6 @@ const DetailPage: FC = () => {
         await deleteCurrentWord();
         closeModal();
       } catch (error) {
-        // Error handling (toast) is done in hook, but we might want to keep modal open or close it?
-        // Original code closed it on error too.
         closeModal();
       }
     };
@@ -77,10 +75,21 @@ const DetailPage: FC = () => {
     <Container>
       <DetailCard>
         {/* Top: Kanji */}
-        <HeaderRow>
-          <KanjiDisplay variant="title" level={1}>
+        <KanjiWrapper>
+          <Typography variant="title" level={1} color="primary.1">
             {word.char || word.jp}
-          </KanjiDisplay>
+          </Typography>
+        </KanjiWrapper>
+
+        {/* Second Row: Reading & Voice */}
+        <InfoRow>
+          {word.char && (
+            <TextWrapper>
+              <Typography variant="title" level={2}>
+                {word.jp}
+              </Typography>
+            </TextWrapper>
+          )}
           <Button
             variant="ghost"
             shape="pill"
@@ -89,33 +98,32 @@ const DetailPage: FC = () => {
           >
             <FaVolumeUp size={24} color="var(--imspdr-foreground-2)" />
           </Button>
-        </HeaderRow>
+        </InfoRow>
 
-        {/* Second Row: Reading & Meaning */}
+        {/* Third Row: Meaning */}
         <InfoRow>
-          {word.char && (
-            <Value variant="title" level={2}>
-              {word.jp}
-            </Value>
-          )}
-          <Value variant="title" level={3} color="foreground.2">
-            {word.ko}
-          </Value>
+          <TextWrapper>
+            <Typography variant="title" level={3} color="foreground.1" bold>
+              {word.ko}
+            </Typography>
+          </TextWrapper>
         </InfoRow>
 
         {/* Third Row: Description */}
         {word.description && (
-          <InfoRow>
-            <Value variant="body" level={1}>
+          <DescriptionWrapper>
+            <Typography variant="body" level={1} >
               {word.description}
-            </Value>
-          </InfoRow>
+            </Typography>
+          </DescriptionWrapper>
         )}
 
         {/* Date Caption */}
-        <DateCaption variant="caption" level={1}>
-          등록일: {word.createdAt.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')}
-        </DateCaption>
+        <DateWrapper>
+          <Typography variant="caption" level={1} color="foreground.2">
+            등록일: {word.createdAt.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')}
+          </Typography>
+        </DateWrapper>
 
         {/* Action Row */}
         <ButtonContainer>

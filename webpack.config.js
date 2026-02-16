@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production' || process.env.NODE_ENV === 'production';
 
   return {
-    entry: './src/index.tsx',
+    entry: env.widgetTest ? './src/test-widget.tsx' : './src/index.tsx',
     mode: isProduction ? 'production' : 'development',
     output: {
       path: path.resolve(__dirname, 'docs'),
@@ -43,7 +43,7 @@ module.exports = (env, argv) => {
         name: 'japword',
         filename: 'remoteEntry.js',
         exposes: {
-          './App': './src/App',
+          './TodaysWord': './src/exports/TodaysWord/index.tsx',
         },
         shared: {
           react: { singleton: true, requiredVersion: deps.react },
