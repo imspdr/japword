@@ -35,4 +35,63 @@ export const StartDescription = styled(Typography)`
   display: block;
 `;
 
+export const SettingsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--imspdr-background-2);
+  border: 1px solid var(--imspdr-background-3);
+  box-sizing: border-box;
+`;
+
+export const FormItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const Input = styled.input`
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--imspdr-background-3);
+  background: var(--imspdr-background-1);
+  color: var(--imspdr-foreground-1);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  &:focus {
+    border-color: var(--imspdr-primary-1);
+  }
+`;
+
+export const CheckboxGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  &:hover {
+    background: var(--imspdr-background-3);
+  }
+
+  input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+`;
+
 
