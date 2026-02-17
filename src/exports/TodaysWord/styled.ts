@@ -11,6 +11,12 @@ export const WidgetContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 export const HeaderRow = styled.div`

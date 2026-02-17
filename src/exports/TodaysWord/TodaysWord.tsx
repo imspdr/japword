@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { useTodaysWord } from './useTodaysWord';
 import { Typography, Button } from '@imspdr/ui';
 import { FaVolumeUp, FaSyncAlt } from 'react-icons/fa';
@@ -13,6 +13,10 @@ import {
 
 const TodaysWord: FC = () => {
   const { word, isLoading, speakWord, refresh } = useTodaysWord();
+
+  const handleContainerClick = () => {
+    window.location.href = 'https://imspdr.github.io/japword';
+  };
 
   if (isLoading) {
     return (
@@ -31,7 +35,7 @@ const TodaysWord: FC = () => {
   }
 
   return (
-    <WidgetContainer>
+    <WidgetContainer onClick={handleContainerClick}>
       <HeaderRow>
         <Typography variant="body" level={3} color="foreground.2" bold>오늘의 단어</Typography>
         <ButtonGroup>
@@ -39,7 +43,10 @@ const TodaysWord: FC = () => {
             variant="ghost"
             size="xs"
             shape="pill"
-            onClick={refresh}
+            onClick={(e: MouseEvent) => {
+              e.stopPropagation();
+              refresh();
+            }}
             aria-label="Refresh"
           >
             <FaSyncAlt size={12} color="var(--imspdr-foreground-2)" />
@@ -48,7 +55,10 @@ const TodaysWord: FC = () => {
             variant="ghost"
             size="xs"
             shape="pill"
-            onClick={() => speakWord(word)}
+            onClick={(e: MouseEvent) => {
+              e.stopPropagation();
+              speakWord(word);
+            }}
             aria-label="Listen"
           >
             <FaVolumeUp size={14} color="var(--imspdr-foreground-2)" />
