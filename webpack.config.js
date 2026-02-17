@@ -44,6 +44,7 @@ module.exports = (env, argv) => {
         filename: 'remoteEntry.js',
         exposes: {
           './TodaysWord': './src/exports/TodaysWord/index.tsx',
+          './MiniWordWidget': './src/exports/MiniWordWidget/index.tsx',
         },
         shared: {
           react: { singleton: true, requiredVersion: deps.react },
