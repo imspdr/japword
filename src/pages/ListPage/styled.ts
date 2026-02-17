@@ -13,17 +13,9 @@ export const GridList = styled.ul`
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 12px;
   max-width: 1200px;
-
-  @media (min-width: 767px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
 `;
 
 export const LoadingContainer = styled.div`
