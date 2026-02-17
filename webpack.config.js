@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
     output: {
       path: path.resolve(__dirname, 'docs'),
       filename: 'bundle.js',
-      publicPath: isProduction ? '/japword/' : '/',
+      publicPath: 'auto',
       clean: true,
     },
     resolve: {
