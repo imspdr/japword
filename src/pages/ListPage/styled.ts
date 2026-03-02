@@ -7,6 +7,10 @@ export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+  }
 `;
 
 export const GridList = styled.ul`
@@ -16,6 +20,10 @@ export const GridList = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 12px;
   max-width: 1200px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 `;
 
 export const LoadingContainer = styled.div`
